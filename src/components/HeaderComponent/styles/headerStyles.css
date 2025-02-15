@@ -1,0 +1,58 @@
+.notification-container {
+    max-height: 300px; /* Limit the height */
+    overflow-y: auto;  /* Enable vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    padding: 10px;
+    position: relative;
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
+}
+
+.notification-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Edge */
+}
+.notification-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1); 
+    border-radius: 10px;
+}
+.notification-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #6a11cb 0%, #2575fc 100%);
+    border-radius: 10px; 
+    transition: background 0.3s, transform 0.2s;
+}
+.notification-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #2575fc 0%, #6a11cb 100%);
+    transform: scale(1.1); 
+}
+
+@keyframes slideOutRight {
+    0% {
+        transform: translateX(0); 
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100vw);
+        opacity: 0;
+    }
+}
+
+.notification-fade-out {
+    animation: slideOutRight 6s ease-out forwards;
+    position: absolute;
+    width: 100%;
+}
+
+.notification-modal {
+    position: absolute;
+    right: 0;
+    margin-top: 0.5rem;
+    width: 20rem;
+    backdrop-filter: blur(10px);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    z-index: 500;
+    max-height: 70vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
