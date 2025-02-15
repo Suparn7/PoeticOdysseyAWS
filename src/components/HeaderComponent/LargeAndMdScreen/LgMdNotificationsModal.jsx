@@ -7,8 +7,7 @@ const LgMdNotificationsModal = ({ notificationsVisible, notificationRef, notific
         notificationsVisible && (
             <div
                 ref={notificationRef}
-                className="absolute right-0 mt-2 w-96 bg-gray-800 text-white rounded-lg shadow-xl z-50 transition-transform duration-300 transform scale-100"
-                style={notificationModalStyle}
+                className={`absolute right-0 mt-2 w-96 bg-gray-800 text-white rounded-lg shadow-xl z-50 transition-transform duration-300 transform scale-100 ${notificationModalStyle}`}
             >
                 <ul className="notification-container flex flex-col space-y-2 p-4">
                     {notifications.length > 0 ? (
