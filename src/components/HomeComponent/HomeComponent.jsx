@@ -70,30 +70,32 @@ const HomeComponent = () => {
   }
 
   return (
-    <div className='w-full py-8 waving-animation'>
-      <Container>
-        <HeroSection userInfoData={userInfoData} />
-        <div className="text-center mt-10 waving-animation">
-          <button onClick={() => setIsModalOpen(true)} className="ml-0 cta-button">
-            <FontAwesomeIcon icon={faUsers} className="mr-2 animate-pulse text-2xl" title="Exploring new worlds" color='rgba(255, 255, 255, 0.8)' />
-            View All Users
-          </button>
-          <Link to="/PoeticOdyssey/all-posts">
-            <button className="explore-button ml-0">
-              <FontAwesomeIcon icon={faBinoculars} className="mr-2 animate-pulse text-2xl" title="Exploring new worlds" color='rgba(255, 255, 255, 0.8)' />
-              Explore All Posts
+    <>
+      <div className='w-full waving-animation'>
+        <Container>
+          <HeroSection userInfoData={userInfoData} />
+          <div className="text-center mt-10 waving-animation">
+            <button onClick={() => setIsModalOpen(true)} className="ml-0 cta-button">
+              <FontAwesomeIcon icon={faUsers} className="mr-2 animate-pulse text-2xl" title="Exploring new worlds" color='rgba(255, 255, 255, 0.8)' />
+              View All Users
             </button>
-          </Link>
-        </div>
-        {posts && posts.length > 0 ? (
-          <PostsSlider posts={posts} />
-        ) : (
-          <NoPostsBanner />
-        )}
-        <UsersModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} loading={loading} />
-        <CallToAction />
-      </Container>
-    </div>
+            <Link to="/PoeticOdyssey/all-posts">
+              <button className="explore-button ml-0">
+                <FontAwesomeIcon icon={faBinoculars} className="mr-2 animate-pulse text-2xl" title="Exploring new worlds" color='rgba(255, 255, 255, 0.8)' />
+                Explore All Posts
+              </button>
+            </Link>
+          </div>
+          {posts && posts.length > 0 ? (
+            <PostsSlider posts={posts} />
+          ) : (
+            <NoPostsBanner />
+          )}
+          <CallToAction />
+        </Container>
+      </div>
+      <UsersModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} loading={loading} />
+    </>
   );
 };
 

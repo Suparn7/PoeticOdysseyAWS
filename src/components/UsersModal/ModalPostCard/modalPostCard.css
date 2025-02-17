@@ -8,8 +8,11 @@
   cursor: pointer;
   transition: transform 0.4s ease, box-shadow 0.3s ease, opacity 0.3s ease, filter 0.5s ease;
   position: relative;
-  overflow: hidden;
   animation: fadeInCard 0.6s ease-out; /* Card fade-in animation */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 }
 
 /* Hover Effects */
@@ -21,8 +24,8 @@
 
 /* Image Section */
 .modal-post-card-image {
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  height: 120px;
   margin: 20px auto; /* Centering the image */
   border-radius: 50%; /* Circular image */
   border: 5px solid teal;
@@ -68,13 +71,12 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 180px; /* Adjusted for a more balanced card */
   background: linear-gradient(135deg, rgba(0, 128, 128, 0.1), rgba(0, 128, 128, 0.2));
-  border-radius: 0 0 20px 20px; /* Rounded bottom corners */
   position: relative;
   transition: background-color 0.3s ease;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-
+  width: 100%;
+  text-align: center;
 }
 
 /* Title */
@@ -93,7 +95,7 @@
 /* Excerpt */
 .modal-post-card-excerpt {
   border-radius: 20px;
-  padding: 6px 6px;
+  padding: 10px;
   font-size: 16px;
   color: #ddd;
   margin-top: 10px;
@@ -101,11 +103,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   transition: color 0.3s ease;
-  height: auto;
   background: linear-gradient(135deg, rgba(2, 8, 8, 0.1), rgba(195, 211, 211, 0.2));
-
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-
 }
 
 /* Read More Link */

@@ -17,7 +17,7 @@
 
 /* Modal Content */
 .user-modal-content {
-  background: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(145deg, #2c3e50, #34495e);
   backdrop-filter: blur(15px);
   padding: 25px;
   border-radius: 20px;
@@ -27,7 +27,6 @@
   animation: slideIn 0.5s ease-in-out;
   overflow-y: auto;
   max-height: 95vh;
-  top: -250px;
   position: relative;
 }
 
