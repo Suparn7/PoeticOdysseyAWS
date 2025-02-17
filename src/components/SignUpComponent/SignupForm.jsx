@@ -1,12 +1,15 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faEnvelope, faPhone, faLock } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faEnvelope, faPhone, faLock, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import ProfilePicUpload from './ProfilePicUpload';
 import Button from '../Button';
+import './styles/signupform.css'
 
 const SignupForm = ({ onSubmit, error, watch, register }) => {
-    //const { register, handleSubmit, watch } = useForm();
+    const [showPassword, setShowPassword] = useState(false);
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
 
     return (
         <form onSubmit={onSubmit} className="space-y-6">
@@ -53,13 +56,18 @@ const SignupForm = ({ onSubmit, error, watch, register }) => {
             <div className="relative">
                 <input
                     {...register("password", { required: true })}
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     placeholder="Password"
                     className="w-full bg-white bg-opacity-20 text-white rounded-lg py-3 px-10 focus:ring-2 focus:ring-green-400 outline-none"
                 />
                 <FontAwesomeIcon
                     icon={faLock}
                     className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                />
+                <FontAwesomeIcon
+                    icon={showPassword ? faEyeSlash : faEye}
+                    className={`absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer eye-icon ${showPassword ? 'eye-icon-hide' : 'eye-icon-show'}`}
+                    onClick={togglePasswordVisibility}
                 />
             </div>
 

@@ -12,17 +12,14 @@ import ConfirmEmail from '../awsComponent/ConfirmEmail';
 import SignupForm from './SignupForm';
 import PasswordModal from './PasswordModal';
 import ErrorMessage from './ErrorMessage';
+import ConfirmEmailModal from './ConfirmEmailModal';
 
-const SignUp = () => {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
+const SignupComponent = () => {
     const { register, handleSubmit, watch } = useForm();
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [profilePicPreview, setProfilePicPreview] = useState(null);
-    const [otp, setOtp] = useState("");  // For OTP entered by the user
-    const [isUserCreated, setIsUserCreated] = useState(false);
     const [showConfirmEmailModal, setShowConfirmEmailModal] = useState(false);
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -72,6 +69,7 @@ const SignUp = () => {
             setShowConfirmEmailModal(true); // Show the confirmation modal
 
         } catch (err) {
+            console.log("err", err);
             setError(err.message || "An error occurred during account creation.");
         } finally {
             setLoading(false);
@@ -117,20 +115,19 @@ const SignUp = () => {
             </div>
 
             {showConfirmEmailModal && (
-                <PasswordModal onClose={() => setShowConfirmEmailModal(false)}>
-                    <ConfirmEmail
-                        email={email}
-                        password={password}
-                        profilePic={profilePic}
-                        bio={bio || ""}
-                        phone={phone}
-                        name={name}
-                        userSub={userSub}
-                    />
-                </PasswordModal>
+                <ConfirmEmailModal
+                    email={email}
+                    password={password}
+                    profilePic={profilePic}
+                    bio={bio}
+                    phone={phone}
+                    name={name}
+                    userSub={userSub}
+                    onClose={() => setShowConfirmEmailModal(false)}
+                />
             )}
         </div>
     );
 };
 
-export default SignUp;
+export default SignupComponent;

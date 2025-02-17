@@ -52,7 +52,30 @@ export class AWSAuthService {
             });
         });
     }
+
+    async resendConfirmationCode(email) {
+        if (!email) {
+            console.error("Email is required to resend confirmation code");
+            return Promise.reject(new Error("Email is required to resend confirmation code"));
+        }
     
+        const user = new CognitoUser({
+            Username: email,
+            Pool: this.userPool,
+        });
+    
+        return new Promise((resolve, reject) => {
+            user.resendConfirmationCode((err, result) => {
+                if (err) {
+                    console.error("Error resending confirmation code:", err);
+                    reject(err);
+                } else {
+                    console.log("Confirmation code resent successfully:", result);
+                    resolve(result);
+                }
+            });
+        });
+    }
 
     // Log in a user
     async login({ email, password }) {

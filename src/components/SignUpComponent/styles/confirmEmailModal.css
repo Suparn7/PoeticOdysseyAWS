@@ -1,0 +1,245 @@
+.confirm-modal-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Glossy Black Background */
+    z-index: 1000;
+    backdrop-filter: blur(8px); /* Increased blur for more pronounced glass effect */
+}
+
+.confirm-modal-content {
+    /* Elegant Gradient Background */
+    background: linear-gradient(
+      135deg,
+      rgba(63, 81, 181, 0.7) 0%,
+      rgba(25, 118, 210, 0.7) 50%,
+      rgba(3, 169, 244, 0.7) 100%
+    );
+    padding: 30px;
+    border-radius: 16px; /* Softer Rounded Corners */
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* More pronounced shadow */
+    transition: all 0.3s ease-in-out;
+    opacity: 1;
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle, brighter border */
+}
+.confirm-modal-content form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.confirm-modal-content input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+/* Entrance Animation */
+.confirm-modal-content {
+    animation: fadeIn 0.4s ease-in-out; /* Slightly slower animation */
+}
+
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-40px); /* Larger distance for more noticeable effect */
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+}
+
+.close-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #fff; /* White close button */
+    transition: color 0.2s ease;
+    opacity: 0.8; /* Reduced opacity for a softer look */
+}
+
+.close-icon:hover {
+    color: #eee;
+    opacity: 1; /* Restore opacity on hover */
+}
+
+h2 {
+    color: #fff; /* White heading */
+    font-size: 28px; /* Slightly Larger Heading */
+    margin-bottom: 25px; /* Increased spacing */
+    text-align: center;
+    font-weight: 500;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Subtle text shadow */
+}
+
+/* Style the OTP Input (assuming you are using otp-input-react) */
+.otp-input {
+    display: flex;
+    justify-content: center; /* Center the OTP input horizontally */
+    margin-bottom: 20px;
+}
+
+.otp-input input {
+    width: 45px; /* Slightly wider input boxes */
+    height: 45px; /* Slightly taller input boxes */
+    border-radius: 10px; /* Softer rounded corners */
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Semi-transparent white border */
+    margin: 0 8px; /* Increased spacing between boxes */
+    text-align: center;
+    font-size: 18px; /* Larger font size */
+    color: #fff; /* White text color */
+    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); /* Subtle box shadow */
+    transition: all 0.2s ease; /* Smooth transition for focus effect */
+}
+
+.otp-input input:focus {
+    outline: none;
+    border-color: #fff; /* Solid white border on focus */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* More pronounced shadow on focus */
+}
+
+/* General Input Styles (if you have other input fields) */
+.otp-input {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+input[type="text"]:focus {
+    outline: none;
+    border-color: #fff; /* Solid white border on focus */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* More pronounced shadow on focus */
+}
+
+.verifying-btn {
+    background-color: rgba(38, 85, 71, 0.9); /* Semi-transparent white button */
+    color: white; /* Dark text color */
+    padding: 14px 24px; /* Increased padding */
+    border: none;
+    border-radius: 20px; /* Softer rounded corners */
+    cursor: pointer;
+    font-size: 18px; /* Larger font size */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions */
+    display: block;
+    margin-top: 15px; /* Increased spacing */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); /* Subtle box shadow */
+}
+
+.verifying-btn:hover {
+    background-color: rgba(255, 255, 255, 1); /* Solid white on hover */
+    color: #000; /* Black text on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* More pronounced shadow on hover */
+}
+
+.verifying-btn:disabled {
+    background-color: rgba(255, 255, 255, 0.5); /* More transparent when disabled */
+    color: #666; /* Lighter text color when disabled */
+    cursor: not-allowed;
+    box-shadow: none; /* Remove shadow when disabled */
+}
+
+p[style*="color: red"] {
+    color: #ff6666 !important; /* Lighter red for error messages */
+    margin-top: 12px; /* Increased spacing */
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* Subtle text shadow */
+}
+
+/* Button Alignment */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 25px; /* Increased spacing */
+}
+
+.button-container button {
+    width: auto;
+    flex: 1;
+    margin: 0 8px;
+}
+
+.resend-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timer-container {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.timer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.circle {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 4px solid #4CAF50;
+    border-top-color: transparent;
+    animation: rotate 60s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.timer-text {
+    position: absolute;
+    font-size: 14px;
+    color: white;
+}
+
+.resend-icon {
+    font-size: 16px;
+    color: #4CAF50;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.resend-icon:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.resend-icon:not(:disabled):hover {
+    color: #45a049;
+}
+
+.resend-icon.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }

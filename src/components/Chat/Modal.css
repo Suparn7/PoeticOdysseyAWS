@@ -80,6 +80,26 @@
   margin-bottom: 15px;
 }
 
+/* Tablet responsiveness */
+@media (max-width: 1024px) {
+  .modal-content {
+    min-width: 70%; /* Adjusted for tablets */
+    padding: 20px;
+    width: 80%;
+    max-width: 90%;
+  }
+
+  .modal-content h2 {
+    font-size: 1.75rem; /* Adjusted font size for tablets */
+  }
+
+  .modal-close {
+    font-size: 25px; /* Adjusted close button size for tablets */
+    top: 10px;
+    right: 10px;
+  }
+}
+
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .modal-content {

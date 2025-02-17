@@ -38,6 +38,7 @@
     "lodash.debounce": "^4.0.8",
     "loglevel": "^1.9.2",
     "nodemailer": "^6.9.15",
+    "otp-input-react": "^0.3.0",
     "process": "^0.11.10",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

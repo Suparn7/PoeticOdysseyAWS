@@ -109,15 +109,15 @@ const UsersModal = ({ isOpen, onClose }) => {
   }
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
+    <div className="user-modal-overlay">
+      <div className="user-modal-content">
         <div className="modal-header">
           <h3 className="modal-title">
             {fetchUserPosts ? `Posts by ${fetchUserPosts.name}` : fetchUserProfile ? `Profile of ${fetchUserProfile.name}` : "ALL USERS"}
           </h3>
 
           <button onClick={handleCancel} className="close-button">
-            <FontAwesomeIcon icon={faTimes} className="icon close-icon" />
+            <FontAwesomeIcon icon={faTimes} className="userModal-icon userModal-close-icon" />
           </button>
         </div>
 

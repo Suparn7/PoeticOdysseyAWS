@@ -6,6 +6,9 @@ import Button from '../Button';
 
 const LoginForm = ({ onSubmit, showPassword, setShowPassword }) => {
     const { register, handleSubmit } = useForm();
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 mt-6">
@@ -34,9 +37,9 @@ const LoginForm = ({ onSubmit, showPassword, setShowPassword }) => {
                     className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
                 />
                 <FontAwesomeIcon
-                    icon={showPassword ? faEye : faEyeSlash}
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer"
+                    icon={showPassword ? faEyeSlash : faEye}
+                    className={`absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer eye-icon ${showPassword ? 'eye-icon-hide' : 'eye-icon-show'}`}
+                    onClick={togglePasswordVisibility}
                 />
             </div>
 

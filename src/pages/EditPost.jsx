@@ -5,6 +5,7 @@ import Container from '../components/container/Container';
 import PostForm from '../components/post-form/PostForm';
 import '../styles/loader.css'; // Import the CSS file for loader styles
 import dynamoService from '../aws/dynamoService';
+import AddPostComponent from '../components/AddPostComponent/AddPostComponent';
 
 const EditPost = () => {
   const [post, setPost] = useState(null);
@@ -50,7 +51,7 @@ const EditPost = () => {
   return (
     <div className='py-6'>
       <Container>
-        <PostForm post={post} />
+        <AddPostComponent post={post} />
       </Container>
     </div>
   );

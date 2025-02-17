@@ -1,9 +1,7 @@
-import LogIn from './LoginComponent/LogIn.jsx'
+import LogIn from './LoginComponent/LoginComponent.jsx'
 import SignUp from './Signup'
-import Profile from './Profile'
 
 export {
     LogIn,
-    SignUp,
-    Profile
+    SignUp
 }

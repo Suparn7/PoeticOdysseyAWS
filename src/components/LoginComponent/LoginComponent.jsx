@@ -13,7 +13,7 @@ import { setPosts } from '../../store/postSlice';
 import LoginForm from './LoginForm';
 import ErrorMessage from './ErrorMessage';
 
-const LogIn = () => {
+const LoginComponent = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [error, setError] = useState("");
@@ -96,4 +96,4 @@ const LogIn = () => {
     );
 };
 
-export default LogIn;
+export default LoginComponent;

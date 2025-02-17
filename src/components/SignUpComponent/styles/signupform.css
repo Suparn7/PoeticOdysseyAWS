@@ -1,0 +1,15 @@
+.eye-icon {
+    color: #ccc;
+}
+
+.eye-icon-show {
+    color: #4caf50; /* Green color when showing password */
+}
+
+.eye-icon-hide {
+    color: #f44336; /* Red color when hiding password */
+}
+
+.eye-icon:hover {
+    color: #ff9800; /* Orange color on hover */
+}

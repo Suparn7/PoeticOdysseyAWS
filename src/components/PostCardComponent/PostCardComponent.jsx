@@ -8,7 +8,7 @@ import PostCardAuthor from './PostCardAuthor';
 import PostCardTitle from './PostCardTitle';
 import PostCardThemeToggle from './PostCardThemeToggle';
 import { fetchAuthorInfo } from '../../actions/postCardActions';
-import './postCardStyles/postCard.css';
+import './postCardStyles/PostCard.css';
 
 const PostCardComponent = ({ blogId, title, content, featuredImage, userId }) => {
   const [author, setAuthor] = useState([]);
@@ -23,9 +23,12 @@ const PostCardComponent = ({ blogId, title, content, featuredImage, userId }) =>
     getAuthor();
   }, [userId]);
 
+  const toggleTheme = () => {
+    setIsDarkTheme(prevTheme => !prevTheme);
+  };
   return (
     <div className={`post-card ${isDarkTheme ? 'post-card-dark' : 'post-card-light'}`}>
-      <PostCardThemeToggle isDarkTheme={isDarkTheme} setIsDarkTheme={setIsDarkTheme} />
+      <PostCardThemeToggle isDarkTheme={isDarkTheme} toggleTheme={toggleTheme} />
       <div className="logo-container">
         <Logo width='60px' />
       </div>

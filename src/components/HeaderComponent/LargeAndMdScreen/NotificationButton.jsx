@@ -8,7 +8,7 @@ const NotificationButton = ({ notificationBellRef, handleNotificationToggle, get
         <Tippy
             key={"Notification"}
             content={<span className="animate-pulse w-16 text-white">{getCreativeTitle("Notification")}</span>}
-            placement="top"
+            placement="right"
             theme="dark"
             interactive={true}
             delay={[100, 0]}
