@@ -55,7 +55,7 @@
 .post-card-container {
   flex: 1 1 240px; /* Allow the cards to grow or shrink while maintaining a base width of 240px */
   max-width: 400px; /* Max width to ensure cards don't stretch too wide */
-  min-width: 300px; /* Minimum width to prevent the cards from becoming too small */
+  min-width: 250px; /* Minimum width to prevent the cards from becoming too small */
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;

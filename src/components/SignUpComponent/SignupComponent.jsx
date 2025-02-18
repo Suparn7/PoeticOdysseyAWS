@@ -89,10 +89,10 @@ const SignupComponent = () => {
     }
 
     return (
-        <div className="flex items-center justify-center w-full min-h-screen">
+        <div className="flex items-center justify-center w-full mt-11">
             <div className="relative w-11/12 max-w-2xl bg-white bg-opacity-10 backdrop-blur-lg p-8 rounded-xl shadow-lg">
                 <div className="text-center mb-6">
-                    <Logo width="100px" />
+                    <Logo width="80px" />
                     <h2 className="text-3xl font-bold text-white mt-4">Create an Account</h2>
                     <p className="text-gray-300 ">
                         Already have an account?{' '}

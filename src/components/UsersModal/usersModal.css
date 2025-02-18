@@ -19,15 +19,16 @@
 .user-modal-content {
   background: linear-gradient(145deg, #2c3e50, #34495e);
   backdrop-filter: blur(15px);
-  padding: 25px;
+  padding: 15px;
   border-radius: 20px;
   width: 70%; /* Wider Modal */
   min-width: 900px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   animation: slideIn 0.5s ease-in-out;
   overflow-y: auto;
-  max-height: 95vh;
+  max-height: 70vh;
   position: relative;
+  
 }
 
 .user-modal-content::-webkit-scrollbar {
@@ -552,7 +553,7 @@ button:hover::after {
 /* Tablet responsiveness */
 @media (max-width: 1024px) {
   .user-modal-content {
-    min-width: 70%; /* Adjusted for tablets */
+    min-width: 80%; /* Adjusted for tablets */
     padding: 20px;
     width: 80%;
     max-width: 90%;
@@ -572,6 +573,21 @@ button:hover::after {
 @media (max-width: 768px) {
   .user-cards-container {
     grid-template-columns: 1fr; /* 1 column for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .user-modal-content {
+    min-width: 90%;
+    padding: 15px;
+  }
+
+  .user-modal-content h2 {
+    font-size: 1.2rem; /* Even smaller font size for extra small screens */
+  }
+
+  .modal-close {
+    font-size: 20px; /* Smallest close button */
   }
 }
 
