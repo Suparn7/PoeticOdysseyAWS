@@ -1,3 +1,14 @@
+.header-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Adjust as needed */
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+}
+
 .notification-container {
     max-height: 300px; /* Limit the height */
     overflow-y: auto;  /* Enable vertical scrolling */
@@ -44,8 +55,9 @@
 
 .notification-modal {
     position: absolute;
+    bottom: 100%; /* Position above the bell icon */
     right: 0;
-    margin-top: 0.5rem;
+    margin-bottom: 0.5rem; /* Adjust as needed */
     width: 20rem;
     backdrop-filter: blur(10px);
     border-radius: 0.5rem;
@@ -55,4 +67,50 @@
     max-height: 70vh;
     overflow-y: auto;
     overflow-x: hidden;
+}
+
+.sm-notifications-modal {
+    position: absolute;
+    bottom: 100%; /* Position above the bell icon */
+    transform: translateX(-50%);
+    margin-bottom: 1rem; /* Adjust as needed */
+    min-width: 250px; /* Set a minimum width */
+    max-width: 90%; /* Set a maximum width */
+    background-color: rgba(128, 128, 128, 0.9); /* Adjust as needed */
+    color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    z-index: 50;
+    overflow-y: auto;
+    max-height: 50vh; /* Limit the height */
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
+}
+
+.sm-notifications-modal::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Edge */
+}
+
+.menu-modal {
+    position: absolute;
+    bottom: 100%; /* Position above the button */
+    right: 0;
+    margin-bottom: 0.5rem; /* Adjust as needed */
+    background-color: rgba(128, 128, 128, 0.9); /* Adjust as needed */
+    color: white;
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    padding: 1.5rem;
+    z-index: 50;
+    max-width: 100%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left: 50px;
+    padding-right: 50px;
 }

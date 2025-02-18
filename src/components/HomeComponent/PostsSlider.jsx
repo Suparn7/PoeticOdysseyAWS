@@ -49,11 +49,11 @@ const PostsSlider = ({ posts }) => {
   }, [posts]);
 
   return (
-    <div className="small-posts-slider mt-12">
+    <div className="small-posts-slider mt-12" >
       <h2 className="text-3xl font-semibold mb-4 text-center">Recent Posts</h2>
-      <div className={`posts-container flex overflow-x-auto space-x-6 py-10 px-2 ${posts.length <= 3 ? 'justify-center' : ''}`} ref={postsContainerRef}>
+      <div className={`posts-container flex overflow-x-auto space-x-6 py-10 px-2 ${posts.length <= 3 ? 'justify-center' : ''}`} ref={postsContainerRef} >
         {posts.slice(Math.max(posts.length - 5, 0)).reverse().map((post, index) => (
-          <div key={index} className="post-card-container">
+          <div key={index} className="post-card-container" >
             <PostCardComponent {...post} />
           </div>
         ))}

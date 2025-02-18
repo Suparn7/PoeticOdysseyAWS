@@ -55,15 +55,15 @@ const HomeComponent = () => {
 
   if (!authStatus) {
     return (
-      <div className='w-full py-8'>
+      <div className='w-full py-32'>
         <Container>
-          <div className="flex items-center justify-center h-full">
-            <div className="relative bg-gray-800 text-white p-8 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 w-full max-w-md">
-              <h1 className="text-2xl text-center mb-4">
-                Please <Link to="/PoeticOdyssey/login" className="text-blue-400 underline hover:text-blue-300">Login</Link> to see or create a Post.
+        <div className="flex items-center justify-center h-full">
+          <div className="relative bg-gray-800 text-white p-8 rounded-lg shadow-2xl transform transition-transform duration-500 hover:scale-110 w-full max-w-md">
+              <h1 className="text-3xl text-center mb-4 animate-pulse">
+                  Please <Link to="/PoeticOdyssey/login" className="text-blue-300 underline hover:text-blue-200 transition-colors duratiopost-card-containern-300">Login</Link> to see or create a post.
               </h1>
-            </div>
           </div>
+      </div>
         </Container>
       </div>
     );

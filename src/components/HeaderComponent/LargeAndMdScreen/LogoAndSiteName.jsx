@@ -7,7 +7,7 @@ const LogoAndSiteName = () => {
         <div className='flex items-center space-x-6'>
             <Link to="/PoeticOdyssey" className="flex items-center space-x-2">
                 <Logo 
-                    width='100px' 
+                    width='70px' 
                     className='transition-all duration-700 ease-in-out transform hover:scale-110 relative top-2'
                 />
             </Link>

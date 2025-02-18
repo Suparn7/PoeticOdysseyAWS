@@ -15,7 +15,7 @@ function Footer() {
     };
 
     return (
-        <section className="relative overflow-hidden mt-10 bg-opacity-40 backdrop-blur-md transition-all duration-500">
+        <section className="relative overflow-hidden bg-opacity-40 backdrop-blur-md transition-all duration-500 pb-24">
             <div className="relative z-10 mx-auto max-w-7xl px-4">
                 <div className="flex flex-wrap justify-between">
                     {/* Logo Section */}

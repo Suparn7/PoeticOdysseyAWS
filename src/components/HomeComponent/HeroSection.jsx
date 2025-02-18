@@ -7,7 +7,7 @@ const HeroSection = ({ userInfoData }) => {
     <div className="hero-section text-white ">
       <div className="text-center p-4 waving-banner"
         style={{
-          background: 'rgba(255, 255, 255, 0.05)',
+          background: 'rgba(0, 0, 0, 0.4)',
           backdropFilter: 'blur(5px)',
           borderRadius: '8px',
           border: '1px solid rgba(255, 255, 255, 0.1)',

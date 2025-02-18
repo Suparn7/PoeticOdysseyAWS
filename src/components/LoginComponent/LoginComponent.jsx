@@ -70,10 +70,10 @@ const LoginComponent = () => {
     }
 
     return (
-        <div className="flex items-center justify-center w-full min-h-screen">
+        <div className="flex items-center justify-center w-full mt-11">
             <div className="relative w-11/12 max-w-lg bg-white bg-opacity-10 backdrop-blur-lg p-8 rounded-xl shadow-lg">
                 <div className="text-center mb-6">
-                    <Logo width="100px" />
+                    <Logo width="80px" />
                 </div>
 
                 <ErrorMessage error={error} />

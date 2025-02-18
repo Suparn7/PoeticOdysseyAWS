@@ -33,9 +33,9 @@ const HeaderContent = ({
     menuVisible
 }) => {
     return (
-        <header className='py-0 shadow-xl sticky top-0 z-50 bg-transparent bg-opacity-80 backdrop-blur-md transition-all duration-500 ease-in-out'>
+        <header className='py-0 w-full shadow-xl fixed bottom-0 z-50 bg-transparent bg-opacity-80 backdrop-blur-md transition-all duration-500 ease-in-out'>
             <Container>
-                <nav className='flex items-center justify-between relative h-44'>
+                <nav className='flex items-center justify-between relative h-24'>
                     {/* Logo and Site Name */}
                     <LogoAndSiteName />
 

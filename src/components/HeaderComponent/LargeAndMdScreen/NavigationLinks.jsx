@@ -9,11 +9,15 @@ const NavigationLinks = ({ navItems, getCreativeTitle, handleNavigation }) => {
                 item.active ? (
                     <Tippy
                         key={item.slug}
-                        content={<span className="animate-pulse text-white">{getCreativeTitle(item.name)}</span>} // Use a span for animation
+                        content={
+                            <span className="whitespace-nowrap animate-pulse w-auto text-slate-200 bg-gray-800 p-2 rounded-lg shadow-lg">
+                                {getCreativeTitle(item.name)}
+                            </span>
+                        } 
                         placement="top" // Adjust placement as needed (top, bottom, left, right)
                         theme="dark"   // Choose a theme (optional)
                         interactive={true} // Allow interaction within the tooltip
-                        delay={[100, 0]}    // Show delay (ms), hide delay (ms)
+                        delay={[300, 0]}    // Show delay (ms), hide delay (ms)
                     >
                         <button
                             href={item.slug}

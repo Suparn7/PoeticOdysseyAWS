@@ -1,12 +1,11 @@
 import React from 'react';
-
+import '../styles/headerStyles.css';
 const SmNotificationsModal = ({ notificationsVisible, notificationRef, notifications, handleNotificationClick, handleDeleteNotification }) => {
     return (
         notificationsVisible && (
             <div
                 ref={notificationRef}
-                className="absolute min-w-80 bg-gray-800 bg-opacity-90 text-white rounded-lg shadow-lg p-4 top-full left-3/4 transform -translate-x-full mt-2 z-50 max-w-xs w-full"
-            >
+                className="sm-notifications-modal"            >
                 <ul className="flex flex-col space-y-2">
                     {notifications.length > 0 ? (
                         notifications.map((notification, index) => {

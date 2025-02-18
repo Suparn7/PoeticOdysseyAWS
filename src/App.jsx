@@ -1,64 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Outlet } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import authService from './appwrite/auth';
-import Header from './components/Header/Header';
+import { useSelector } from "react-redux";
 import Footer from './components/Footer/Footer';
-import { login, logout } from './store/authSlice';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'; // Import ErrorBoundary
-import CreateBlog from './components/awsComponent/CreateBlog';
-import dynamoService from './aws/dynamoService';
-import awsAuthService from './aws/awsAuthService';
-import { setUserData, clearUserData } from './store/userSlice';
-import dynamoUserInformationService from './aws/dynamoUserInformationService';
-import { setPosts } from './store/postSlice';
 import HeaderComponent from './components/HeaderComponent/HeaderComponent';
 import useWebSocketService from './webSocketServices/useWebSocketService';
+import LogoAndSiteName from './components/HeaderComponent/LargeAndMdScreen/LogoAndSiteName';
 
 function App() {
-    // const [loading, setLoading] = useState(true);
-    // const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //     // Step 1: Check current user
-    //     awsAuthService.getCurrentUser()
-    //         .then(async (userData) => {
-    //             if (userData) {
-    //                 dispatch(login({ userData }));
-                    
-    //                 // Step 2: Fetch additional user data from DynamoDB
-    //                 const fullUserData = await dynamoUserInformationService.getUserInfoByUserNameId(userData.username);
-
-    //                 if (fullUserData) {
-    //                     // Step 3: Dispatch full user data to Redux
-    //                     dispatch(setUserData(fullUserData));
-    //                     // Step 4: Fetch all the posts created by user
-    //                     if (fullUserData.postsCreated.length > 0) {
-    //                         const posts = await dynamoService.getPostsByIds(fullUserData.postsCreated);
-                            
-    //                         // Step 5: Fetch comments for each post
-    //                         const postsWithComments = await Promise.all(posts.map(async (post) => {
-    //                             const comments = await dynamoService.getCommentsByPostId(post.blogId);
-    //                             return { ...post, comments }; // Combine post with its comments
-    //                         }));
-
-    //                         dispatch(setPosts(postsWithComments)); // Dispatch posts with comments
-    //                     }
-    //                 }
-    //             } else {
-    //                 console.log("No user found, logging out.");
-    //                 dispatch(logout());
-    //                 dispatch(clearUserData());
-    //             }
-    //         })
-    //         .catch((error) => {
-    //             console.error("Error retrieving user data:", error);
-    //             dispatch(logout());
-    //             dispatch(clearUserData());
-    //         })
-    //         .finally(() => setLoading(false));
-    // }, [dispatch]);
-
     const userData = useSelector((state) => state.user.userData);
     const [notificationSocketUrl, setNotificationSocketUrl] = useState(null);
 
@@ -68,18 +17,22 @@ function App() {
         }
     }, [userData]);
 
-    const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocketService(notificationSocketUrl);
-        console.log("socket call received! inisde apppp", sendJsonMessage, lastJsonMessage, readyState);
-
+    const { sendJsonMessage, lastJsonMessage, readyState } =  useWebSocketService(notificationSocketUrl);
+    //console.log("socket call received! inisde apppp", sendJsonMessage, lastJsonMessage, readyState);
 
     return (
         <ErrorBoundary> {/* Wrap with ErrorBoundary */}
-            <div className='min-h-screen flex flex-col bg-cover bg-center' style={{ backgroundImage: 'url(https://images.pexels.com/photos/2098427/pexels-photo-2098427.jpeg)' }}>
-                <HeaderComponent sendJsonMessage={sendJsonMessage} lastJsonMessage={lastJsonMessage} readyState={readyState} />
-                <main className='flex-grow transition-transform duration-300'>
-                    <Outlet />
-                </main>
-                <Footer className="bg-black bg-opacity-50" />
+            <div className='min-h-screen flex flex-col bg-inherit bg-center' style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1517999144091-3d9dca6d1e43?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTk1fHxiYWNrZ3JvdW5kfGVufDB8fDB8fHwwhttps://images.unsplash.com/photo-1517999144091-3d9dca6d1e43?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTk1fHxiYWNrZ3JvdW5kfGVufDB8fDB8fHwwhttps://images.unsplash.com/photo-1517999144091-3d9dca6d1e43?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTk1fHxiYWNrZ3JvdW5kfGVufDB8fDB8fHww)' }}>
+                <div className='fixed top-0 left-0 right-0 bg-black bg-opacity-40 backdrop-blur-md flex justify-center items-center' style={{ height: '100px', zIndex: 10 }}>
+                    <LogoAndSiteName />
+                </div>
+                <div className='flex-grow overflow-y-auto' style={{ marginTop: '100px' }}> {/* Scrollable container */}
+                    <main className='transition-transform duration-300'>
+                        <Outlet />
+                    </main>
+                </div>
+                <HeaderComponent className='fixed bottom-0 left-0 right-0' sendJsonMessage={sendJsonMessage} lastJsonMessage={lastJsonMessage} readyState={readyState} />
+                <Footer className="fixed bottom-0 left-0 right-0 bg-black bg-opacity-50" />
             </div>
         </ErrorBoundary>
     )

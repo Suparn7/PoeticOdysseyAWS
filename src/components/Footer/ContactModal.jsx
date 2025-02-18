@@ -62,16 +62,16 @@ const ContactModal = ({ isOpen, onClose }) => {
 
     // Modal and form styles
     const modalStyle = {
-        fixed: 'fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50 transition-opacity duration-300',
-        content: 'bg-white bg-opacity-30 backdrop-blur-md rounded-lg p-8 shadow-lg w-11/12 max-w-md transform transition-all duration-500 ease-in-out scale-95 hover:scale-100 relative',
+        fixed: 'fixed inset-0 pb-20 flex items-center justify-center bg-black bg-opacity-70 z-50 transition-opacity duration-300',
+        content: 'bg-white bg-opacity-30 backdrop-blur-md rounded-lg px-8 pt-8 pb-4 shadow-lg w-11/12 max-w-md md:max-w-lg lg:max-w-xl transform transition-all duration-500 ease-in-out scale-95 hover:scale-100 relative h-auto max-h-screen overflow-y-auto pb-16', // Added padding-bottom
         title: 'text-3xl font-semibold mb-6 text-white text-center animate__animated animate__fadeIn animate__delay-1s',
         error: 'text-red-500 animate__animated animate__fadeIn animate__delay-1s',
         success: 'text-green-500 animate__animated animate__fadeIn animate__delay-1s',
         input: 'w-full p-4 border-2 border-gray-300 rounded-lg bg-transparent text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 transform hover:ring-4 hover:ring-blue-500 placeholder:text-gray-400 placeholder:opacity-70',
-        button: 'bg-gradient-to-r from-purple-500 to-indigo-600 text-white py-3 px-6 rounded-full shadow-xl transform transition-all duration-300 hover:scale-110 hover:bg-gradient-to-l hover:shadow-2xl hover:ring-4 hover:ring-indigo-500',
-        cancelButton: 'py-3 px-6 rounded-full border border-gray-300 text-white bg-gradient-to-r from-red-500 to-indigo-300 shadow-lg transition-opacity duration-300 hover:opacity-80 hover:ring-4 hover:ring-red-500',
+        button: 'bg-gradient-to-r from-purple-500 to-indigo-600 text-white py-3 px-6 rounded-full shadow-xl transform transition-all duration-300  hover:bg-gradient-to-l hover:shadow-2xl hover:ring-4 hover:ring-indigo-500',
+        cancelButton: 'py-3 px-6 rounded-full border border-gray-300 text-white bg-gradient-to-r from-red-500 to-indigo-300 shadow-lg transition-opacity duration-300  hover:ring-4 hover:ring-red-500',
         glowEffect: 'animation-glow 1.5s ease-in-out infinite alternate',
-        closeButton: 'absolute top-4 right-4 w-10 h-10 bg-transparent border-2 border-white rounded-full flex items-center justify-center cursor-pointer hover:scale-110 hover:rotate-45 transition-all duration-300 hover:bg-white hover:text-black animate-pulse'
+        closeButton: 'absolute top-4 right-4 w-10 h-10 bg-transparent border-2 border-white rounded-full flex items-center justify-center cursor-pointer  hover:rotate-45 transition-all duration-300 hover:bg-white hover:text-black animate-pulse'
     };
 
     return createPortal(

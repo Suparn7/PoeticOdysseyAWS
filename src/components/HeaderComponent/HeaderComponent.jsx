@@ -78,27 +78,29 @@ const HeaderComponent = ({sendJsonMessage, lastJsonMessage, readyState}) => {
     }, [lastJsonMessage]);
 
     return (
-        <HeaderContent
-            navItems={navItems}
-            getCreativeTitle={getCreativeTitle}
-            handleNavigation={(slug) => handleNavigation(slug, navigate, setMenuVisible, setNotificationsVisible)}
-            authStatus={authStatus}
-            notificationRef={notificationRef}
-            notificationBellRef={notificationBellRef}
-            handleNotificationToggle={() => handleNotificationToggle(setNotificationsVisible, setMenuVisible, notificationsVisible, menuVisible)}
-            notifications={notifications}
-            notificationsVisible={notificationsVisible}
-            handleNotificationClick={(postId, fromUserId) => handleNotificationClick(postId, fromUserId, navigate, setNotificationsVisible, setNotificationsVisibleForSmallScreen, setMenuVisible)}
-            handleDeleteNotification={(notificationId) => handleDeleteNotification(notificationId, userData, setDeletingNotification, notifications, setNotifications, setNotificationsVisible, dispatch)}
-            notificationModalStyle="notification-modal" // Use the CSS class instead of inline styles
-            menuRef={menuRef}
-            notificationBellRefForSmScreen={notificationBellRefForSmScreen}
-            handleNotificationToggleForSmallScreen={() => handleNotificationToggleForSmallScreen(setNotificationsVisibleForSmallScreen, setMenuVisible, notificationsVisibleForSmallScreen, menuVisible)}
-            notificationsVisibleForSmallScreen={notificationsVisibleForSmallScreen}
-            notificationRefForSmScreen={notificationRefForSmScreen}
-            handleMenuToggle={() => handleMenuToggle(setMenuVisible, setNotificationsVisible, setNotificationsVisibleForSmallScreen, menuVisible, notificationsVisible, notificationsVisibleForSmallScreen)}
-            menuVisible={menuVisible}
-        />
+        <div className="header-container">
+            <HeaderContent
+                navItems={navItems}
+                getCreativeTitle={getCreativeTitle}
+                handleNavigation={(slug) => handleNavigation(slug, navigate, setMenuVisible, setNotificationsVisible)}
+                authStatus={authStatus}
+                notificationRef={notificationRef}
+                notificationBellRef={notificationBellRef}
+                handleNotificationToggle={() => handleNotificationToggle(setNotificationsVisible, setMenuVisible, notificationsVisible, menuVisible)}
+                notifications={notifications}
+                notificationsVisible={notificationsVisible}
+                handleNotificationClick={(postId, fromUserId) => handleNotificationClick(postId, fromUserId, navigate, setNotificationsVisible, setNotificationsVisibleForSmallScreen, setMenuVisible)}
+                handleDeleteNotification={(notificationId) => handleDeleteNotification(notificationId, userData, setDeletingNotification, notifications, setNotifications, setNotificationsVisible, dispatch)}
+                notificationModalStyle="notification-modal" // Use the CSS class instead of inline styles
+                menuRef={menuRef}
+                notificationBellRefForSmScreen={notificationBellRefForSmScreen}
+                handleNotificationToggleForSmallScreen={() => handleNotificationToggleForSmallScreen(setNotificationsVisibleForSmallScreen, setMenuVisible, notificationsVisibleForSmallScreen, menuVisible)}
+                notificationsVisibleForSmallScreen={notificationsVisibleForSmallScreen}
+                notificationRefForSmScreen={notificationRefForSmScreen}
+                handleMenuToggle={() => handleMenuToggle(setMenuVisible, setNotificationsVisible, setNotificationsVisibleForSmallScreen, menuVisible, notificationsVisible, notificationsVisibleForSmallScreen)}
+                menuVisible={menuVisible}
+            />
+        </div>
     );
 };
 

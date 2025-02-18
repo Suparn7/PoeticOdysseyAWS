@@ -26,8 +26,10 @@ const PostCardComponent = ({ blogId, title, content, featuredImage, userId }) =>
   const toggleTheme = () => {
     setIsDarkTheme(prevTheme => !prevTheme);
   };
+
+
   return (
-    <div className={`post-card ${isDarkTheme ? 'post-card-dark' : 'post-card-light'}`}>
+    <div className={`post-card ${isDarkTheme ? 'post-card-dark' : 'post-card-light'}`} >
       <PostCardThemeToggle isDarkTheme={isDarkTheme} toggleTheme={toggleTheme} />
       <div className="logo-container">
         <Logo width='60px' />
