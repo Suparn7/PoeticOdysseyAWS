@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Footer from './components/Footer/Footer';
@@ -6,16 +6,42 @@ import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'; // Import 
 import HeaderComponent from './components/HeaderComponent/HeaderComponent';
 import useWebSocketService from './webSocketServices/useWebSocketService';
 import LogoAndSiteName from './components/HeaderComponent/LargeAndMdScreen/LogoAndSiteName';
+import Peer from 'peerjs'; // Import PeerJS
 
 function App() {
     const userData = useSelector((state) => state.user.userData);
     const [notificationSocketUrl, setNotificationSocketUrl] = useState(null);
+    const [peer, setPeer] = useState(null);
+    const peerRef = useRef(null); // Use useRef to store the Peer instance
+    
+    useEffect(() => {
+        const initializePeer = async () => {
+            if (!peerRef.current) { // Check if the Peer instance has already been initialized
+                const newPeer = new Peer();
+                newPeer.on('open', (id) => {
+                    console.log('Peer connected with ID: ', id);
+                    setPeer(newPeer);
+                });
+
+                peerRef.current = newPeer; // Store the Peer instance in the ref
+            }
+        };
+
+        initializePeer();
+        
+        return () => {
+            if (peerRef.current) {
+                peerRef.current.destroy();
+                peerRef.current = null; // Reset the ref
+            }
+        };
+    }, []);
 
     useEffect(() => {
-        if (userData?.userId) {
-            setNotificationSocketUrl(`wss://l8eegkbrkd.execute-api.ap-south-1.amazonaws.com/production/?userId=${userData.userId}`);
+        if (userData?.userId && peer?.id) {
+            setNotificationSocketUrl(`wss://l8eegkbrkd.execute-api.ap-south-1.amazonaws.com/production/?userId=${userData.userId}&peerId=${peer.id}`);
         }
-    }, [userData]);
+    }, [userData, peer]);
 
     const { sendJsonMessage, lastJsonMessage, readyState } =  useWebSocketService(notificationSocketUrl);
     //console.log("socket call received! inisde apppp", sendJsonMessage, lastJsonMessage, readyState);
@@ -31,7 +57,7 @@ function App() {
                         <Outlet />
                     </main>
                 </div>
-                <HeaderComponent className='fixed bottom-0 left-0 right-0' sendJsonMessage={sendJsonMessage} lastJsonMessage={lastJsonMessage} readyState={readyState} />
+                <HeaderComponent className='fixed bottom-0 left-0 right-0' sendJsonMessage={sendJsonMessage} lastJsonMessage={lastJsonMessage} readyState={readyState} peer={peer}/>
                 <Footer className="fixed bottom-0 left-0 right-0 bg-black bg-opacity-50" />
             </div>
         </ErrorBoundary>

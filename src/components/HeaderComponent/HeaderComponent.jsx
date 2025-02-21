@@ -18,8 +18,10 @@ import useWebSocketNotifications from './Hooks/useWebSocketNotifications';
 import useInitialNotifications from './Hooks/useInitialNotifications';
 import navItemsConfig from './config/navItemsConfig';
 import { addUserNotification, deleteUserNotification } from '../../store/notificationSlice';
+import CallModal from '../Chat/CallModal';
+import CallingModal from './CallingModal';
 
-const HeaderComponent = ({sendJsonMessage, lastJsonMessage, readyState}) => {
+const HeaderComponent = ({ sendJsonMessage, lastJsonMessage, readyState, peer }) => {
     const authStatus = useSelector((state) => state.auth.status);
     const userData = useSelector((state) => state.user.userData);
     const [notifications, setNotifications] = useState([]);
@@ -35,10 +37,11 @@ const HeaderComponent = ({sendJsonMessage, lastJsonMessage, readyState}) => {
     const notificationRefForSmScreen = useRef(null);
     const notificationBellRef = useRef(null);
     const notificationBellRefForSmScreen = useRef(null);
+    const [isCallModalOpen, setIsCallModalOpen] = useState(false);
+    const [peersToCall, setPeersToCall] = useState(null);
 
     const navItems = navItemsConfig(authStatus);
 
-    //const { sendNotificationJsonMessage } = useWebSocketNotifications(userData, notifications, setNotifications);
     const { loading } = useInitialNotifications(userData, setNotifications);
 
     useEffect(() => {
@@ -74,33 +77,53 @@ const HeaderComponent = ({sendJsonMessage, lastJsonMessage, readyState}) => {
                     return prevNotifications.filter((notification) => notification.notificationId !== notificationId);
                 });
             }
+
+            if (lastJsonMessage?.action === 'sendCall') {
+                setIsCallModalOpen(true);
+                setPeersToCall(lastJsonMessage?.data);
+            };
         }
     }, [lastJsonMessage]);
 
     return (
-        <div className="header-container">
-            <HeaderContent
-                navItems={navItems}
-                getCreativeTitle={getCreativeTitle}
-                handleNavigation={(slug) => handleNavigation(slug, navigate, setMenuVisible, setNotificationsVisible)}
-                authStatus={authStatus}
-                notificationRef={notificationRef}
-                notificationBellRef={notificationBellRef}
-                handleNotificationToggle={() => handleNotificationToggle(setNotificationsVisible, setMenuVisible, notificationsVisible, menuVisible)}
-                notifications={notifications}
-                notificationsVisible={notificationsVisible}
-                handleNotificationClick={(postId, fromUserId) => handleNotificationClick(postId, fromUserId, navigate, setNotificationsVisible, setNotificationsVisibleForSmallScreen, setMenuVisible)}
-                handleDeleteNotification={(notificationId) => handleDeleteNotification(notificationId, userData, setDeletingNotification, notifications, setNotifications, setNotificationsVisible, dispatch)}
-                notificationModalStyle="notification-modal" // Use the CSS class instead of inline styles
-                menuRef={menuRef}
-                notificationBellRefForSmScreen={notificationBellRefForSmScreen}
-                handleNotificationToggleForSmallScreen={() => handleNotificationToggleForSmallScreen(setNotificationsVisibleForSmallScreen, setMenuVisible, notificationsVisibleForSmallScreen, menuVisible)}
-                notificationsVisibleForSmallScreen={notificationsVisibleForSmallScreen}
-                notificationRefForSmScreen={notificationRefForSmScreen}
-                handleMenuToggle={() => handleMenuToggle(setMenuVisible, setNotificationsVisible, setNotificationsVisibleForSmallScreen, menuVisible, notificationsVisible, notificationsVisibleForSmallScreen)}
-                menuVisible={menuVisible}
-            />
-        </div>
+        <>
+            {/* Call Modal */}
+            {isCallModalOpen && (
+                <>
+                    <CallingModal
+                        peer={peer}
+                        peersToCall={peersToCall}
+                        onClose={() => setIsCallModalOpen(false)}
+                        sendJsonMessage={sendJsonMessage}
+                        lastJsonMessage={lastJsonMessage}
+                        userID={userData.userId}
+                    />
+                </>
+            )}
+            <div className="header-container">
+                <HeaderContent
+                    navItems={navItems}
+                    getCreativeTitle={getCreativeTitle}
+                    handleNavigation={(slug) => handleNavigation(slug, navigate, setMenuVisible, setNotificationsVisible)}
+                    authStatus={authStatus}
+                    notificationRef={notificationRef}
+                    notificationBellRef={notificationBellRef}
+                    handleNotificationToggle={() => handleNotificationToggle(setNotificationsVisible, setMenuVisible, notificationsVisible, menuVisible)}
+                    notifications={notifications}
+                    notificationsVisible={notificationsVisible}
+                    handleNotificationClick={(postId, fromUserId) => handleNotificationClick(postId, fromUserId, navigate, setNotificationsVisible, setNotificationsVisibleForSmallScreen, setMenuVisible)}
+                    handleDeleteNotification={(notificationId) => handleDeleteNotification(notificationId, userData, setDeletingNotification, notifications, setNotifications, setNotificationsVisible, dispatch)}
+                    notificationModalStyle="notification-modal" // Use the CSS class instead of inline styles
+                    menuRef={menuRef}
+                    notificationBellRefForSmScreen={notificationBellRefForSmScreen}
+                    handleNotificationToggleForSmallScreen={() => handleNotificationToggleForSmallScreen(setNotificationsVisibleForSmallScreen, setMenuVisible, notificationsVisibleForSmallScreen, menuVisible)}
+                    notificationsVisibleForSmallScreen={notificationsVisibleForSmallScreen}
+                    notificationRefForSmScreen={notificationRefForSmScreen}
+                    handleMenuToggle={() => handleMenuToggle(setMenuVisible, setNotificationsVisible, setNotificationsVisibleForSmallScreen, menuVisible, notificationsVisible, notificationsVisibleForSmallScreen)}
+                    menuVisible={menuVisible}
+                />
+            </div>
+        </>
     );
 };
 

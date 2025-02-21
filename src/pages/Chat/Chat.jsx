@@ -7,7 +7,6 @@ import ChatComponent from "../../components/Chat/ChatComponent";
 const ChatPage = () => {
   const userInfo = useSelector((state) => state.user.userData);
   const [chatDetailsSocketUrl, setChatDetailsSocketUrl] = useState('');
-  
 
   useEffect(() => {
     if (userInfo.userId) {
@@ -16,7 +15,7 @@ const ChatPage = () => {
   }, [userInfo.userId]);
   
   const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocketService(chatDetailsSocketUrl);
-
+  
   return (
     <ChatComponent sendJsonMessage={sendJsonMessage} lastJsonMessage={lastJsonMessage} readyState={readyState} />
   );

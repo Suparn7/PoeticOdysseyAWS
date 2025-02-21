@@ -1,19 +1,20 @@
 /* General Layout */
 .chat-window {
   max-width: 600px;
-  margin: 30px auto;
-  padding: 30px;
+  margin: 20px auto;
+  padding: 10px;
   background: linear-gradient(145deg, #2c3e50, #1f3347);
   border-radius: 18px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 20px 80px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  height: 75vh;
+  height: 60vh;
   overflow: hidden;
   position: relative;
   z-index: 1000;
   transform: scale(1);
   transition: all 0.3s ease-in-out;
+  margin-top: 50px;
 }
 
 .chat-window:hover {
@@ -24,12 +25,12 @@
 
 /* Header */
 .chat-header {
-  font-size: 26px;
+  font-size: 10px;
   font-weight: bold;
   text-align: center;
   color: #fff;
   letter-spacing: 2px;
-  margin-bottom: 25px;
+  margin-bottom: 5px;
   transition: all 0.4s ease;
   text-transform: uppercase;
   animation: fadeIn 1s ease-in-out, slideIn 0.8s ease-in-out;
@@ -43,7 +44,7 @@
 }
 
 .chat-header-name {
-  margin-left: 10px;
+  margin-left: 20px;
   text-transform: capitalize;
 }
 
@@ -53,18 +54,16 @@
   transform: translateY(-5px);
 }
 
-
 /* Message List Styling */
 .message-list {
   flex-grow: 1;
   overflow-y: scroll; /* Allow vertical scrolling */
-  margin-bottom: 20px;
-  padding-right: 20px;
+  margin-bottom: 5px;
+  padding-right: 10px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
   animation: fadeIn 1.5s ease-in-out; /* Smooth fade-in for the list */
-  
+  overflow-x: hidden;
   /* Hide scrollbar for webkit browsers (Chrome, Safari, etc.) */
   -ms-overflow-style: none;  /* Hides scrollbar in IE and Edge */
   scrollbar-width: none;  /* Hides scrollbar in Firefox */
@@ -76,9 +75,9 @@
 
 /* Message Styling */
 .message {
-  padding: 16px;
+  padding: 8px;
   border-radius: 22px;
-  font-size: 16px;
+  font-size: 8px;
   position: relative;
   min-width: 130px;
   max-width: 75%;
@@ -100,10 +99,11 @@
   color: white;
   align-self: flex-end;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  margin-top: 15px;
+  padding: 5px;
+  margin-top: 10px;
   border-radius: 20px;
   transform: translateX(0);
+  font-size: small;
 }
 
 .message.sent:hover {
@@ -116,13 +116,14 @@
   color: white;
   align-self: flex-start;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  padding: 20px;
+  padding: 5px;
   margin-top: 15px;
   margin-left: 20px;
   border-radius: 20px;
   transform: translateX(0);
   width: auto;
   height: auto;
+  font-size: small;
 }
 
 .message.received:hover {
@@ -137,18 +138,20 @@
 /* Sender/Receiver Name (Header) */
 .message-header {
   position: absolute;
-  top: -18px;
+  top: -10px;
   left: 10px;
   right: 10px;
   font-size: 14px;
-  font-weight: bold;
+  font-weight:normal;
   color: #fff; /* White for better contrast */
   display: flex;
   justify-content: space-between;
+  font-style: italic;
 }
 
 /* Sender Name Color */
 .message-sender {
+  font-size: xx-small;
   color: #ffffff; /* White color for the sender's name */
   min-width: 500px;
   overflow: hidden;
@@ -187,10 +190,9 @@
 
 .preview-image {
   max-width: 100%;
-  max-height: 220px;
+  max-height: 100px;
   border-radius: 15px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  margin-bottom: 12px;
   transition: all 0.3s ease;
 }
 
@@ -203,9 +205,9 @@
 .chat-input {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   border-top: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
-  padding: 14px 20px;
+  padding: 4px 10px;
   background: linear-gradient(145deg, #2c3e50, #1f3347); /* Gradient background for input area */
   border-radius: 35px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2), inset 0 0 15px rgba(255, 255, 255, 0.1); /* Glow effect */
@@ -219,10 +221,10 @@
 /* Input Field */
 .chat-input input {
   width: 75%;
-  padding: 14px 20px;
+  padding: 7px 10px;
   border: none;
   border-radius: 30px;
-  font-size: 16px;
+  font-size: 10px;
   outline: none;
   background: #fff;
   color: #333;
@@ -239,15 +241,14 @@
 
 /* Send Button with FontAwesome Icon */
 .chat-input button {
-  width: 18%;
-  padding: 14px;
+  width: 10%;
+  padding: 7px;
   background-color: #ff6347; /* Warm color for the button */
   color: white;
   border: none;
-  border-radius: 50%;
-  font-size: 18px;
+  border-radius: 24px;
+  font-size: 15px;
   cursor: pointer;
-  margin-left: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -264,7 +265,7 @@
 
 /* Send Icon inside the button */
 .chat-input button svg {
-  font-size: 22px; /* Icon size */
+  font-size: 18px; /* Icon size */
   color: white;
   transition: all 0.3s ease;
 }
@@ -474,7 +475,7 @@
   gap: 10px;
   background-color: rgba(0, 0, 0, 0.5); /* Transparent black */
   border-radius: 10px;
-  padding: 10px;
+  padding: 1px;
   z-index: 2;
   transition: transform 0.3s ease-in-out;
   overflow-x: auto; /* Allow horizontal scrolling if needed */
@@ -486,8 +487,8 @@
 .reaction-options {
   display: flex;
   flex-wrap: nowrap; /* Keep all reactions in a row */
-  padding: 5px;
-  gap: 5px;
+  padding: 1px;
+  gap: 2px;
 }
 
 /* Hide the scrollbar but still make it scrollable */
@@ -514,9 +515,9 @@
 .reaction-smiley {
   cursor: pointer;
   position: absolute;
-  bottom: -20px;
-  right: -10px;
-  font-size: 1.5rem;
+  bottom: -10px;
+  right: -5px;
+  font-size: 1rem;
   color: #fff;
   transition: color 0.3s ease;
 }
@@ -531,9 +532,9 @@
   display: inline-flex;
   align-items: center; /* Vertically center the emoji */
   justify-content: center; /* Horizontally center the emoji */
-  font-size: 1.5rem; /* Adjust size for the emoji */
+  font-size: 1rem; /* Adjust size for the emoji */
   gap: 0px;  /* No gap between the emoji and the profile pic directly */
-  padding: 2px 6px; /* Padding for a clean, non-cramped look */
+  padding: 1px 3px; /* Padding for a clean, non-cramped look */
   border-radius: 8px; /* Rounded corners for smoothness */
 }
 
@@ -550,11 +551,10 @@
   position: absolute;
   bottom: 0; /* Align to bottom */
   right: 0; /* Align to right */
-  width: 18px; /* Small size for the profile picture */
-  height: 18px;
+  width: 12px; /* Small size for the profile picture */
+  height: 12px;
   border-radius: 50%; /* Circle shape */
   object-fit: cover; /* Ensure the image fills the circle */
-  border: 2px solid #fff; /* Optional border around the profile picture */
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.2); /* Optional shadow for emphasis */
 }
 
@@ -579,7 +579,6 @@
 
 /* Add some space around the message container */
 .message {
-  margin-bottom: 15px;
   position: relative;
 }
 
@@ -588,14 +587,10 @@
 /* For small devices like phones */
 @media screen and (max-width: 600px) {
   .chat-window {
-    width: 90%;
-    padding: 20px;
+    width: 95%;
   }
 
-  .chat-header {
-    font-size: 22px;
-    margin-bottom: 15px;
-  }
+ 
 
   .message {
     padding: 14px;
@@ -619,14 +614,10 @@
 /* For tablets and medium-sized devices */
 @media screen and (max-width: 768px) {
   .chat-window {
-    width: 85%;
-    padding: 25px;
+    width: 95%;
   }
 
-  .chat-header {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
+ 
 
   .message {
     padding: 16px;
@@ -642,12 +633,10 @@
 /* For large screens and desktops */
 @media screen and (min-width: 1024px) {
   .chat-window {
-    max-width: 650px;
+    max-width: 700px;
   }
 
-  .chat-header {
-    font-size: 28px;
-  }
+ 
 
   .message {
     font-size: 16px;

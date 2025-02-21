@@ -177,8 +177,6 @@ class AwsChatService {
     try {
       const command = new ScanCommand(params);
       const data = await dynamoDocClient.send(command);
-      console.log("data", data);
-      
       const sortedMessages = data.Items.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
       return sortedMessages.map((msg) => ({
         ...msg,

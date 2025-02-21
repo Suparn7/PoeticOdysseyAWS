@@ -6,7 +6,7 @@ const ChatInput = ({ message, setMessage, handleSendMessage, isUploading, handle
   <div className="chat-input">
     <div className="chat-input-icons">
       <label htmlFor="file-input">
-        <FontAwesomeIcon icon={faPaperclip} className="icon" />
+        <FontAwesomeIcon icon={faImage} className="icon" />
       </label>
       <input
         ref={fileInputRef}
@@ -16,7 +16,7 @@ const ChatInput = ({ message, setMessage, handleSendMessage, isUploading, handle
         style={{ display: "none" }}
         onChange={handleImageChange}
       />
-      <FontAwesomeIcon icon={faImage} className="icon" />
+      
     </div>
     <input
       type="text"

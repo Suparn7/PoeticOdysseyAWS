@@ -9,7 +9,8 @@ import ImagePreview from "./ImagePreview";
 import ChatInput from "./ChatInput";
 import "./ChatWindow.css";
 
-const ChatWindow = ({ chatId, userId, receiverId, receiverName, receiverProfilePicUrl, updateLatestMessage }) => {
+const ChatWindow = ({ chatId, userId, receiverId, receiverName, receiverProfilePicUrl, updateLatestMessage, sendJsonMessage, lastJsonMessage }) => {
+  
   const dispatch = useDispatch();
   const { messages } = useSelector((state) => state.chat);
   const [message, setMessage] = useState("");
@@ -21,9 +22,7 @@ const ChatWindow = ({ chatId, userId, receiverId, receiverName, receiverProfileP
   const fileInputRef = useRef(null);
   const [showReactions, setShowReactions] = useState(null);
   const [selectedReactions, setSelectedReactions] = useState({});
-  const [chatSocketUrl, setChatSocketUrl] = useState(null);
   const reactionsList = ["thumbsup", "heart", "laugh", "sad", "angry", "surprised", "like", "thumbsdown"];
-  const { sendJsonMessage, lastJsonMessage } = useWebSocketService(chatSocketUrl);
 
   useEffect(() => {
     setIsLoading(true);
@@ -48,12 +47,6 @@ const ChatWindow = ({ chatId, userId, receiverId, receiverName, receiverProfileP
       setIsLoading(false);
     }
   }, [chatId, dispatch]);
-
-  useEffect(() => {
-    if (chatId) {
-      setChatSocketUrl(`wss://dw0mhlo126.execute-api.ap-south-1.amazonaws.com/production/?chatId=${chatId}&userId=${userId}`);
-    }
-  }, [chatId, userId]);
 
   useEffect(() => {
     if (lastJsonMessage !== null) {
@@ -186,7 +179,14 @@ const ChatWindow = ({ chatId, userId, receiverId, receiverName, receiverProfileP
 
   return (
     <div className="chat-window">
-      <ChatHeader receiverProfilePicUrl={receiverProfilePicUrl} receiverName={receiverName} receiverId={receiverId} />
+      <ChatHeader 
+        receiverProfilePicUrl={receiverProfilePicUrl} 
+        receiverName={receiverName} 
+        receiverId={receiverId} 
+        sendJsonMessage={sendJsonMessage}
+        lastJsonMessage={lastJsonMessage}
+        chatId={chatId}
+      />
       {isLoading ? (
         <div className="loader-container">
           <div className="loader"></div>

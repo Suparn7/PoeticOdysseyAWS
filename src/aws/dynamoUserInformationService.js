@@ -21,6 +21,28 @@ class DynamoUserInformationService {
         }
     }
 
+    async getPeerDetailsByUserId(userId) {
+        const params = {
+            TableName: 'realtimeUserConnections', // Replace with your actual table name
+            KeyConditionExpression: 'userId = :userId',
+            ExpressionAttributeValues: {
+                ':userId': userId,
+            },
+        };
+
+        try {
+            const result = await dynamoDocClient.send(new QueryCommand(params));
+            if (result.Items && result.Items.length > 0) {
+                // Assuming the latest connection is the one we want
+                const latestConnection = result.Items[0];
+                return latestConnection || null;
+            }
+            return null;
+        } catch (error) {
+            console.error("Error fetching peerId:", error);
+            return null;
+        }
+    }
     async getUsers() {
         const params = {
             TableName: awsConf.dynamoDbTableUserInformation
