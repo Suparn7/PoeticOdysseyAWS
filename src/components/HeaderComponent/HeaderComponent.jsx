@@ -55,7 +55,7 @@ const HeaderComponent = ({ sendJsonMessage, lastJsonMessage, readyState, peer })
         if (lastJsonMessage !== null) {
             console.log('Received message:', lastJsonMessage);
 
-            if (lastJsonMessage.data?.userId !== userData?.userId) {
+            if (lastJsonMessage.data?.userId !== userData?.userId && lastJsonMessage?.action !== 'sendCall' && lastJsonMessage?.action !== 'sendCallAccepted' && lastJsonMessage?.action !== 'sendCallEnded') {
                 const existingNotification = notifications.find((noti) => noti?.notificationId === lastJsonMessage?.data?.notificationId);
 
                 if (!existingNotification) {
@@ -96,7 +96,9 @@ const HeaderComponent = ({ sendJsonMessage, lastJsonMessage, readyState, peer })
                         onClose={() => setIsCallModalOpen(false)}
                         sendJsonMessage={sendJsonMessage}
                         lastJsonMessage={lastJsonMessage}
-                        userID={userData.userId}
+                        userData={userData}
+                        isVideoCall={lastJsonMessage?.data?.isVideoCall}
+                        isCaller={lastJsonMessage?.data?.callerUserId === userData.userId}
                     />
                 </>
             )}

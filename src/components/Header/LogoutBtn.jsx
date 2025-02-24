@@ -78,6 +78,7 @@ const LogoutBtn = ({handleMenuToggle, title}) => {
                 theme="dark"
                 interactive={true}
                 delay={[100, 0]}
+                appendTo={() => document.body}
             >
                 <button
                     className="inline-block ml-0 mr-0 px-3 py-2 text-2xl text-white bg-red-600 rounded-full shadow-lg transition duration-300 transform hover:bg-red-700 hover:scale-105 hover:shadow-xl"

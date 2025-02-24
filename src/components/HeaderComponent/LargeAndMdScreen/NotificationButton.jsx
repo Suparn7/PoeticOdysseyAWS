@@ -16,6 +16,7 @@ const NotificationButton = ({ notificationBellRef, handleNotificationToggle, get
             theme="dark"
             interactive={true}
             delay={[300, 0]}
+            appendTo={() => document.body}
         >
             <button
                 ref={notificationBellRef}

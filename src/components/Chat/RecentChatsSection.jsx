@@ -26,7 +26,7 @@ const RecentChatsSection = ({ chatList, userId, userList, setChatId }) => {
                 <div className="chat-card-content">
                   <div className="profile-pic-container">
                     <img
-                      src={receiverProfilePicUrl || "https://via.placeholder.com/50"}  // Fallback to placeholder if no profile picture
+                      src={receiverProfilePicUrl || "https://avatar.iran.liara.run/public/boy?username=Ash"}  // Fallback to placeholder if no profile picture
                       alt={`${receiverName}'s profile`}
                       className="profile-pic"
                     />

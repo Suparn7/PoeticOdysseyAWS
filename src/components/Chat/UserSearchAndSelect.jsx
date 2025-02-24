@@ -17,7 +17,7 @@ const UserSearchAndSelect = ({ searchQuery, handleSearchChange, filteredUsers, s
             <li key={user.userId} className="user-card" onClick={() => handleUserSelect(user.userId)}>
               <div className="profile-pic-container">
                 <img
-                  src={user.profilePicUrl || "https://via.placeholder.com/50"}  // Fallback to placeholder if no profile picture
+                  src={user.profilePicUrl || "https://avatar.iran.liara.run/public/boy?username=Ash"}  // Fallback to placeholder if no profile picture
                   alt={user.name}
                   className="profile-pic"
                 />

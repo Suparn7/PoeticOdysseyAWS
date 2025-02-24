@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
 
 const ChatHeader = ({ receiverProfilePicUrl, receiverName, receiverId, sendJsonMessage, lastJsonMessage, chatId }) => {
   const [isCallModalOpen, setIsCallModalOpen] = useState(false);
-  const [isVideoCall, setIsVideoCall] = useState(false);
   const [peer, setPeer] = useState(null);
   const [remoteStream, setRemoteStream] = useState(null);
   const [call, setCall] = useState(null);
@@ -41,9 +40,21 @@ const ChatHeader = ({ receiverProfilePicUrl, receiverName, receiverId, sendJsonM
       }
   };
     
-  const sendPeerIdMessageToReceiverHeader = async () => {
+  const sendPeerIdMessageToReceiverHeader = async (isVideoCall) => {
     const receiverPeerDetails = await fetchPeerDetails(receiverId);
     const callerPeerDetails = await fetchPeerDetails(userData.userId);
+
+    console.log("Receiver Peer Details", receiverPeerDetails);
+    console.log("Caller Peer Details", callerPeerDetails);
+    
+    if(receiverPeerDetails === undefined){
+        console.log("TODO: Handle the case where the receiver's peer ID is not found.");
+
+        //SEND JSON MESSAGE TO RECEIVER CHATDETAILS ABOUT A MISSED CALL FROM CALLER
+        
+        alert(`${receiverName} is not online. Please try again later.`);
+        return; 
+    }
     
     sendJsonMessage(
       { 
@@ -59,7 +70,8 @@ const ChatHeader = ({ receiverProfilePicUrl, receiverName, receiverId, sendJsonM
             callerId: userData.userId,
             peerId: callerPeerDetails.peerId,
             connectionId: callerPeerDetails.connectionId
-          }
+          },
+          isVideoCall: isVideoCall
         } 
       });
   }
@@ -77,23 +89,13 @@ const ChatHeader = ({ receiverProfilePicUrl, receiverName, receiverId, sendJsonM
               {receiverName}
           </Link>
           <div className="flex space-x-4">
-              <button aria-label="Call" className="text-white hover:text-gray-300" onClick={() => sendPeerIdMessageToReceiverHeader()}>
+              <button aria-label="Video Call" className="text-white hover:text-gray-300" onClick={() => sendPeerIdMessageToReceiverHeader(true)}>
                   <FontAwesomeIcon icon={faVideo} />
               </button>
-              {/* <button aria-label="Video Call" className="text-white hover:text-gray-300" onClick={() => startCall(true)}>
-                  <FontAwesomeIcon icon={faVideo} />
-              </button> */}
+              <button aria-label="Call" className="text-white hover:text-gray-300" onClick={() => sendPeerIdMessageToReceiverHeader(false)}>
+                  <FontAwesomeIcon icon={faPhone} />
+              </button>
           </div>
-
-          {/* Call Modal */}
-          {isCallModalOpen && (
-              <CallModal
-                  onClose={handleCloseCallModal}
-                  remoteVideoRef={remoteVideoRef}
-                  isVideoCall={isVideoCall}
-              />
-          )}
-          {isCallModalOpen && <video ref={remoteVideoRef} autoPlay style={{ width: '300px', height: '300px' }} />}
       </div>
   );
 };

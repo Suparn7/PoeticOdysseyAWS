@@ -340,6 +340,7 @@ const Header = React.memo(() => {
                                         theme="dark"   // Choose a theme (optional)
                                         interactive={true} // Allow interaction wi thin the tooltip
                                         delay={[100, 0]}    // Show delay (ms), hide delay (ms)
+                                        appendTo={() => document.body} // Append to body to avoid clipping
                                     >
                                         <button
                                             href={item.slug}
@@ -365,6 +366,7 @@ const Header = React.memo(() => {
                                         theme="dark"
                                         interactive={true}
                                         delay={[100, 0]}
+                                        appendTo={() => document.body}
                                     >
                                         <button
                                             ref={notificationBellRef}
@@ -530,6 +532,7 @@ const Header = React.memo(() => {
                                                     theme="dark"   // Choose a theme (optional)
                                                     interactive={true} // Allow interaction within the tooltip
                                                     delay={[100, 0]}    // Show delay (ms), hide delay (ms)
+                                                    appendTo={() => document.body}
                                                 >
                                                     <button
                                                         href={item.slug}

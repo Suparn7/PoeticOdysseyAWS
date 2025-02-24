@@ -3,7 +3,22 @@ import './styles/videoContainer.css'; // Import the CSS file for animations
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMicrophone, faMicrophoneSlash, faVideo, faVideoSlash } from '@fortawesome/free-solid-svg-icons';
 
-const VideoContainer = ({ isCaller, isCallAccepted, localVideoRef, remoteVideoRef }) => {
+const VideoContainer = ({ isCaller, isCallAccepted, localVideoRef, remoteVideoRef, getUserDetails, callerUserId, receiverUserId }) => {
+    const [userDetails, setUserDetails] = useState(null);
+    const isCallerRef = useRef(isCaller);
+
+    useEffect(() => {
+        const fetchUserDetails = async () => {
+            const userId = isCallerRef.current ? receiverUserId : callerUserId;
+            const details = await getUserDetails(userId);
+            console.log("User details", details);
+            
+            setUserDetails(details);    
+        };
+
+        fetchUserDetails();
+    }, [isCallerRef.current, callerUserId, receiverUserId, getUserDetails]);   
+
     const [isLocalVideoSmall, setIsLocalVideoSmall] = useState(true);
     const [isVideoClicked, setIsVideoClicked] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
@@ -56,7 +71,7 @@ const VideoContainer = ({ isCaller, isCallAccepted, localVideoRef, remoteVideoRe
 
     return (
         <div className="video-container flex justify-center items-center relative bg-gray-900 p-4 rounded-lg shadow-lg">
-            {isCaller ? (
+            {isCallerRef.current ? (
                 isCallAccepted ? (
                     <>
                         <video

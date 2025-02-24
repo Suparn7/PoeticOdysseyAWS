@@ -17,6 +17,7 @@ const MenuModal = ({ navItems, getCreativeTitle, handleNavigation, authStatus, h
                             theme="dark"   // Choose a theme (optional)
                             interactive={true} // Allow interaction within the tooltip
                             delay={[300, 0]}    // Show delay (ms), hide delay (ms)
+                            appendTo={() => document.body}
                         >
                             <button
                                 href={item.slug}

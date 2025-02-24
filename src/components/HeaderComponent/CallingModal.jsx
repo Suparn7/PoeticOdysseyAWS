@@ -3,22 +3,26 @@ import dynamoUserInformationService from '../../aws/dynamoUserInformationService
 import CallModal from '../CallComponents/CallModal';
 import VideoContainer from '../CallComponents/VideoContainer';
 import CallControls from '../CallComponents/CallControls';
+import AudioContainer from '../CallComponents/AudioContainer';
 
-const CallingModal = ({ peer, peersToCall, onClose, sendJsonMessage, lastJsonMessage, userID }) => {
-    const [isCaller, setIsCaller] = useState(false);
+const CallingModal = ({ peer, peersToCall, onClose, sendJsonMessage, lastJsonMessage, userID, isVideoCall, isCaller }) => {
     const [isCallAccepted, setIsCallAccepted] = useState(false);
     const [localStream, setLocalStream] = useState(null);
     const [remoteStream, setRemoteStream] = useState(null);
     const localVideoRef = useRef(null);
     const remoteVideoRef = useRef(null);
+    const localAudioRef = useRef(null);
+    const remoteAudioRef = useRef(null);
     const callRef = useRef(null);
+    const isVideoCallRef = useRef(isVideoCall);
+    const isCallerRef = useRef(isCaller);
 
     useEffect(() => {
         const getMediaStream = async () => {
             try {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                const stream = await navigator.mediaDevices.getUserMedia({ video: isVideoCallRef.current, audio: true });
                 setLocalStream(stream);
-                if (localVideoRef.current) {
+                if (isVideoCallRef.current && localVideoRef.current) {
                     localVideoRef.current.srcObject = stream;
                 }
             } catch (error) {
@@ -27,24 +31,23 @@ const CallingModal = ({ peer, peersToCall, onClose, sendJsonMessage, lastJsonMes
         };
 
         getMediaStream();
-    }, []);
+    }, [isVideoCallRef.current]);
 
     useEffect(() => {
         if (peersToCall && localStream) {
             const { receiverPeerId, callerPeerId } = peersToCall;
             if (peer.id === callerPeerId) {
-                setIsCaller(true);
                 const call = peer.call(receiverPeerId, localStream);
                 callRef.current = call;
                 call.on('stream', (remoteStream) => {
                     setRemoteStream(remoteStream);
-                    if (remoteVideoRef.current) {
+                    if (isVideoCallRef.current && remoteVideoRef.current) {
                         remoteVideoRef.current.srcObject = remoteStream;
                     }
                 });
             }
         }
-    }, [peersToCall, peer, localStream]);
+    }, [peersToCall, peer, localStream, isVideoCallRef.current]);
 
     useEffect(() => {
         if (peersToCall) {
@@ -55,7 +58,7 @@ const CallingModal = ({ peer, peersToCall, onClose, sendJsonMessage, lastJsonMes
                 });
             }
         }
-    }, [peersToCall, peer]);
+    }, [peersToCall, peer, isVideoCallRef.current]);
 
     useEffect(() => {
         if (lastJsonMessage !== null) {
@@ -66,10 +69,12 @@ const CallingModal = ({ peer, peersToCall, onClose, sendJsonMessage, lastJsonMes
                 setIsCallAccepted(true);
                 const getMediaStream = async () => {
                     try {
-                        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                        const stream = await navigator.mediaDevices.getUserMedia({ video: isVideoCallRef.current, audio: true });
                         setLocalStream(stream);
-                        if (localVideoRef.current) {
+                        if (isVideoCallRef.current && localVideoRef.current) {
                             localVideoRef.current.srcObject = stream;
+                        } else if (!isVideoCallRef.current && localAudioRef.current) {
+                            localAudioRef.current.srcObject = stream;
                         }
                         console.log('Local stream set:', stream);
                     } catch (error) {
@@ -98,30 +103,37 @@ const CallingModal = ({ peer, peersToCall, onClose, sendJsonMessage, lastJsonMes
                 onClose();
             }
         }
-    }, [lastJsonMessage]);
+    }, [lastJsonMessage, isVideoCallRef.current]);
 
     const handleAcceptCall = async () => {
+        console.log("isVideoCall", isVideoCallRef.current);   
+        
         const call = callRef.current;
         const { callerUserId } = peersToCall;
+        console.log('Accepting call...', call);
+        console.log('Local stream:', localStream);
         
         if (call && localStream) {
             call.answer(localStream);
-            call.on('stream', (remoteStream) => {
-                setRemoteStream(remoteStream);
-                if (remoteVideoRef.current) {
-                    remoteVideoRef.current.srcObject = remoteStream;
+            call.on('stream', (incomingRemoteStream) => {
+                console.log("incomingRemoteStream", incomingRemoteStream);
+                setRemoteStream(incomingRemoteStream);
+                if (isVideoCallRef.current && remoteVideoRef.current) {
+                    console.log("isVideoCall", isVideoCallRef.current);
+                    remoteVideoRef.current.srcObject = incomingRemoteStream;
+                } else if (!isVideoCallRef.current && remoteAudioRef.current) {
+                    remoteAudioRef.current.srcObject = incomingRemoteStream;
                 }
             });
             setIsCallAccepted(true);
-            const callerPeerDetails = await dynamoUserInformationService.getPeerDetailsByUserId(callerUserId)
-
-            sendJsonMessage(
-                { 
-                action: 'sendCallAccepted', 
-                data: { 
-                    callerConnetionId: callerPeerDetails.connectionId, 
-                    isCallAccepted: true 
-                } 
+            const callerPeerDetails = await dynamoUserInformationService.getPeerDetailsByUserId(callerUserId);
+        
+            sendJsonMessage({
+                action: 'sendCallAccepted',
+                data: {
+                    callerConnetionId: callerPeerDetails.connectionId,
+                    isCallAccepted: true
+                }
             });
         }
     };
@@ -143,31 +155,53 @@ const CallingModal = ({ peer, peersToCall, onClose, sendJsonMessage, lastJsonMes
         onClose();
     
         const { receiverUserId, callerUserId } = peersToCall;
-        const toUpdateCallEndedUserId = isCaller ? receiverUserId : callerUserId;
-        const targetUserDetails = await dynamoUserInformationService.getPeerDetailsByUserId(toUpdateCallEndedUserId)
+        const toUpdateCallEndedUserId = isCallerRef.current ? receiverUserId : callerUserId;
+        const targetUserDetails = await dynamoUserInformationService.getPeerDetailsByUserId(toUpdateCallEndedUserId);
 
-    
-        sendJsonMessage(
-            { 
-            action: 'sendCallEnded', 
-            data: { 
-                targetUserConnectionId: targetUserDetails.connectionId, 
-                isCallEnded: true 
-            } 
+        sendJsonMessage({
+            action: 'sendCallEnded',
+            data: {
+                targetUserConnectionId: targetUserDetails.connectionId,
+                isCallEnded: true
+            }
         });
     };
 
+    const getUserDetails = async (userId) => {
+        try {
+            const userDetails = await dynamoUserInformationService.getUserInfoByUserNameId(userId);
+            return userDetails;
+        } catch (error) {
+            console.error('Failed to fetch user details.', error);
+        }
+    }
+
     return (
         <CallModal>
-            <h2 className="text-lg font-semibold mb-4">{isCaller ? 'Calling...' : 'Incoming call...'}</h2>
-            <VideoContainer
-                isCaller={isCaller}
-                isCallAccepted={isCallAccepted}
-                localVideoRef={localVideoRef}
-                remoteVideoRef={remoteVideoRef}
-            />
+            {/* <h2 className="text-lg font-semibold mb-4">{isCallerRef.current ? 'Calling...' : 'Incoming call...'}</h2> */}
+            {isVideoCallRef.current ? (
+                <VideoContainer
+                    isCaller={isCallerRef.current}
+                    isCallAccepted={isCallAccepted}
+                    localVideoRef={localVideoRef}
+                    remoteVideoRef={remoteVideoRef}
+                    getUserDetails={getUserDetails}
+                    callerUserId={peersToCall?.callerUserId}
+                    receiverUserId={peersToCall?.receiverUserId}
+                />
+            ) : (
+                <AudioContainer
+                    isCaller={isCallerRef.current}
+                    isCallAccepted={isCallAccepted}
+                    localAudioRef={localAudioRef}
+                    remoteAudioRef={remoteAudioRef}
+                    getUserDetails={getUserDetails}
+                    callerUserId={peersToCall?.callerUserId}
+                    receiverUserId={peersToCall?.receiverUserId}
+                />
+            )}
             <CallControls
-                isCaller={isCaller}
+                isCaller={isCallerRef.current}
                 isCallAccepted={isCallAccepted}
                 handleAcceptCall={handleAcceptCall}
                 handleEndCall={handleEndCall}
