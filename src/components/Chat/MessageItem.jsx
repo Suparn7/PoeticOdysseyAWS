@@ -2,6 +2,8 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSmile } from "@fortawesome/free-solid-svg-icons";
 import ReactionOptions from "./ReactionOptions";
+import './styles/messageItem.css'
+import MissedCallMessage from "./MissedCallMessage";
 
 const MessageItem = ({ msg, userId, receiverName, selectedReactions, handleToggleReactions, handleAddReaction, showReactions, reactionsList, receiverProfilePicUrl }) => (
   <div className={`message ${msg.senderId === userId ? "sent" : "received"}`}>
@@ -13,6 +15,11 @@ const MessageItem = ({ msg, userId, receiverName, selectedReactions, handleToggl
 
     {msg.msgType === "text" ? (
       <p>{msg.messageContent}</p>
+    ) : msg.msgType === "missedCall" ? (
+      <MissedCallMessage
+          messageContent={msg.messageContent}
+          isVideoCall={msg.messageContent.includes('video')}
+        />
     ) : (
       <div className="image-preview-in-message-list">
         <img src={msg.msgImg} alt="message" className="preview-image" />

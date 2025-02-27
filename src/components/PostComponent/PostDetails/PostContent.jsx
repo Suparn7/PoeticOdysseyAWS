@@ -5,14 +5,15 @@ import parse from 'html-react-parser';
 const PostContent = ({ post, author, userData }) => {
     return (
         <div
-            className="text-center px-3 text-gray-200 mt-2 comments-container shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105"
+            className="flex items-center justify-center text-center px-3 text-sm text-gray-200 mt-2  shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105"
             style={{
                 maxHeight: '300px',
+                minHeight: '300px',
                 overflowY: 'auto',
                 overflowX: 'hidden',
                 padding: '10px',
                 border: '1px solid #ffffff',
-                borderRadius: '8px',
+                borderRadius: '50px',
                 backgroundColor: 'rgba(255, 255, 255, 0.1)',
                 boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
                 wordWrap: 'break-word',

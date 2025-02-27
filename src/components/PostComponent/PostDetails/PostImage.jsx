@@ -7,10 +7,9 @@ const PostImage = ({ post, imageLoading, setImageLoading }) => {
             <img
                 src={post.featuredImage}
                 alt={post.title}
-                className={`rounded-lg transition-transform duration-500 ease-in-out ${
+                className={`rounded-3xl transition-transform duration-500 ease-in-out w-1/2 ${
                     imageLoading ? 'hidden' : 'scale-100'
                 } hover:scale-105`}
-                style={{ maxHeight: '300px', minWidth: '200px' }}
                 onLoad={() => setImageLoading(false)}
             />
         </div>

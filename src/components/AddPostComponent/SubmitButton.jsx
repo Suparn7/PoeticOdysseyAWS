@@ -7,7 +7,7 @@ const SubmitButton = ({ post }) => (
   <Button
     type="submit"
     bgColor={post ? "bg-green-500" : "bg-blue-500"}
-    className="ml-0 w-full transition-all duration-500 transform hover:scale-105 hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-600 hover:shadow-2xl text-white font-semibold uppercase rounded-lg flex items-center justify-center space-x-3"
+    className="ml-0 w-full transition-all duration-500 transform hover:scale-105 hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-600 hover:shadow-2xl text-white font-semibold uppercase rounded-3xl flex items-center justify-center space-x-3"
   >
     <FontAwesomeIcon
       icon={post ? faSyncAlt : faPaperPlane} 

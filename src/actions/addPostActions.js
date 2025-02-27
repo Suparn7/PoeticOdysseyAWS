@@ -33,7 +33,7 @@ export const submit = async (data, userData, post, selectedImage, dispatch, navi
         }
       
 
-        if (!data.image && selectedImage) {
+        if (!data.image && selectedImage && selectedImage !== post?.featuredImage) {
           if (selectedImage.startsWith("blob:") || selectedImage.startsWith("data:image")) {
               const blob = await fetch(selectedImage).then((res) => res.blob());
               const file = new File([blob], 'image.jpg', { type: 'image/jpeg' });

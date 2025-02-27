@@ -8,7 +8,10 @@ const SmNotificationsModal = ({ notificationsVisible, notificationRef, notificat
                 className="sm-notifications-modal"            >
                 <ul className="flex flex-col space-y-2">
                     {notifications.length > 0 ? (
-                        notifications.map((notification, index) => {
+                        notifications
+                        .slice()
+                        .sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime())
+                        .map((notification, index) => {
                             return (
                                 <li
                                     key={index}

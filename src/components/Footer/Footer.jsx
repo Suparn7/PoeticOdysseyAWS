@@ -19,15 +19,15 @@ function Footer() {
             <div className="relative z-10 mx-auto max-w-7xl px-4">
                 <div className="flex flex-wrap justify-between">
                     {/* Logo Section */}
-                    <div className="w-full p-4 md:w-1/3">
+                    {/* <div className="w-full p-4 md:w-1/3">
                         <div className="flex items-center justify-center mb-4">
                             <Logo width="100px" className="transition-all duration-500 ease-in-out transform hover:scale-110 animate-spin-slow" />
                             <span className="ml-4 text-2xl font-extrabold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600 animate-bounce"></span>
                         </div>
-                    </div>
+                    </div> */}
 
-                    {/* Follow Us Section */}
-                    <div className="w-full p-4 md:w-1/3">
+                    {/* Follow Us Section md:w-1/3 */} 
+                    <div className="w-full p-4 ">
                         <h3 className="text-lg font-semibold text-white mb-4 text-center animate-bounce">Follow Us</h3>
                         <ul className="flex justify-center space-x-6">
                             <li className="relative">
@@ -79,7 +79,7 @@ function Footer() {
 
 
                     {/* Useful Links Section */}
-                    <div className="w-full p-4 md:w-1/3">
+                    {/* <div className="w-full p-4 md:w-1/3">
                         <h3 className="text-lg font-semibold text-white mb-4 text-center animate-bounce">Useful Links</h3>
                         <ul className="text-center">
                             <li className="mb-2">
@@ -92,7 +92,7 @@ function Footer() {
                                 <Link to="/PoeticOdyssey" className="text-gray-400 hover:text-white transition duration-300 transform hover:scale-110">Help Center</Link>
                             </li>
                         </ul>
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* Contact Us Button */}

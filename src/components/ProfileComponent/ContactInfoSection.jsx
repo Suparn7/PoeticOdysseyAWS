@@ -4,10 +4,10 @@ import { faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
 
 const ContactInfoSection = ({ isEditing, email, phone, handleEmailChange, handlePhoneChange }) => {
     return (
-        <div className="rounded-lg p-6 w-full mt-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-xl"
-            style={{ background: "rgba(0,0,0,0.3)" }}
+        <div className="rounded-3xl p-4 w-full transform transition-all duration-300 hover:scale-105 hover:shadow-3xl shadow-3xl"
+            style={{ background: "rgba(0,0,0,0.4)" }}
         >
-            <h2 className="text-xl font-semibold mb-4 animate__animated animate__fadeInUp">Contact Information</h2>
+            <h2 className="text-lg font-semibold mb-4 animate__animated animate__fadeInUp">Contact Information</h2>
 
             {/* Editable Email */}
             {isEditing ? (

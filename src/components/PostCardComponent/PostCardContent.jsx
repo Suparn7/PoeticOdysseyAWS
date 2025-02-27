@@ -4,7 +4,7 @@ import parse from 'html-react-parser';
 const PostCardContent = ({ content }) => {
   return (
     <div className="content">
-      <div>
+      <div className='w-full' >
         {parse(content.length > 100 ? `${content.substring(0, 50)}...` : content)}  
       </div>
     </div>

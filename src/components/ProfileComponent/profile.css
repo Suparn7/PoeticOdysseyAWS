@@ -1,0 +1,71 @@
+/* Example CSS for hover effects and animations */
+.hover-scale {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .hover-scale:hover {
+    transform: scale(1.1);
+  }
+  
+  .gradient-background {
+    background: linear-gradient(to bottom, #4c5154, #2f3436);
+  }
+  
+  /* Add animations to follow buttons */
+  .follow-button {
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .follow-button:hover {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  /* Add animations to modals */
+  .modal-enter {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  
+  .modal-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 300ms, transform 300ms;
+  }
+  
+  .modal-leave-active {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 300ms, transform 300ms;
+  }
+
+  .profile-card {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr; /* Adjust rows as needed */
+    grid-template-columns: 1fr 1fr; /* Adjust columns as needed */
+    gap: 20px;
+  }
+  
+  .top-section {
+    grid-column: 1 / -1; /* Span across all columns */
+  }
+  
+  .middle-section {
+    grid-column: 1 / -1; /* Span across all columns */
+  }
+  
+  .bottom-section {
+    grid-column: 1 / -1; /* Span across all columns */
+  }
+
+  /* In your global CSS file */
+.scrollable-content::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .scrollable-content {
+    scrollbar-width: none;
+  }
+  
+  
+  

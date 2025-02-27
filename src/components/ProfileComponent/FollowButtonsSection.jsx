@@ -20,7 +20,7 @@ const FollowButtonsSection = ({
                         color: "#fff",
                         fontWeight: "600",
                         padding: "8px 16px",
-                        borderRadius: "8px",
+                        borderRadius: "40px",
                         marginRight: "2px",
                         transition: "transform 0.3s ease-in-out",
                         marginLeft: '5px'
@@ -44,7 +44,7 @@ const FollowButtonsSection = ({
                     color: "#fff",
                     fontWeight: "600",
                     padding: "8px 16px",
-                    borderRadius: "8px",
+                    borderRadius: "40px",
                     marginRight: "2px",
                     marginLeft: '5px'
                 }}>
@@ -54,11 +54,11 @@ const FollowButtonsSection = ({
             {/* Followers Button */}
             <button onClick={() => fetchFollowers()}
                 style={{
-                    background: "#7b1fa2",
+                    background: "",
                     color: "#fff",
                     fontWeight: "600",
                     padding: "8px 16px",
-                    borderRadius: "8px",
+                    borderRadius: "40px",
                     marginLeft: '5px'
                 }}>
                 Followers

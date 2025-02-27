@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const LikedBySection = ({ likedByUsers, userData, handleShowModal }) => {
     return (
         <div className="mt-4 relative">
-            <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105">
+            <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 p-4 rounded-3xl shadow-3xl hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105">
                 {likedByUsers && likedByUsers.length > 0 ? (
                     <>
                         <div className="flex flex-wrap items-center space-x-2">
@@ -30,10 +31,15 @@ const LikedBySection = ({ likedByUsers, userData, handleShowModal }) => {
                                     )
                                     .slice(0, 1)
                                     .map((user) => (
-                                        <span key={user.userId}>
-                                            {user.name}{" "}
-                                            {user.userId === userData.userId && "(You)"}
-                                        </span>
+                                        <Link
+                                            to={`/PoeticOdyssey/profile/${user.userId}`}
+                                            className="text-white"
+                                        >
+                                            <span key={user.userId}>
+                                                {user.name}{" "}
+                                                {user.userId === userData.userId && "(You)"}
+                                            </span>
+                                        </Link>
                                     ))}
                                 {likedByUsers.length > 1 && (
                                     <>

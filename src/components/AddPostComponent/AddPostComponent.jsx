@@ -114,7 +114,7 @@ const AddPostComponent = ({ post }) => {
   }
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-fit relative">
       {
           showConfirm && (
               <ConfirmCancel confirmCancel={() => confirmCancel(setShowConfirm, post, navigate)} cancel={() => cancel(setShowConfirm)} />
@@ -157,7 +157,7 @@ const AddPostComponent = ({ post }) => {
               <FileUpload selectImageFromPC={(file) => selectImageFromPC(file, setSelectedImage, setIsImageSelectedFromPC, setIsImageSelectedFromSearch)}/>
             )}
 
-            {/* Status Select */}
+            {/* Status Select: TODO ADD ANY FILTER IF YOU WANT */}
             {/* <Select
             options={["active", "inactive"]}
             label="Status"

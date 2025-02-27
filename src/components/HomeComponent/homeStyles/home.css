@@ -1,7 +1,6 @@
 .hero-section {
   color: white;
   text-align: center;
-  
 }
 
 .hero-section h1 {
@@ -14,7 +13,7 @@
 }
 
 .hero-section button {
-  padding: 12px 24px;
+  padding: 6px 12px;
   background-color: #007bff;
   border-radius: 8px;
   transition: background-color 0.3s ease;
@@ -25,22 +24,20 @@
 }
 
 .small-posts-slider {
-  margin-top: 40px;
+  margin-top: 0px;
   position: relative;
 }
 
 .posts-container {
   display: flex;
-  gap: 20px;
+  gap: 10px;
   overflow-x: auto;
   scrollbar-width: none;
   padding: 30px 30px;
-  border-radius: 12px;
+  border-radius: 50px;
   box-shadow:0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
   transition: box-shadow 0.3s ease;
   background: rgba(255, 255, 255, 0.05); /* Subtle white background */
-  backdrop-filter: blur(5px); /* Apply a blur to the background */
-  border-radius: 8px; /* Rounded corners for the glass effect */
   border: 1px solid rgba(255, 255, 255, 0.1); /* Add a subtle border */
 }
 
@@ -55,7 +52,7 @@
 .post-card-container {
   flex: 1 1 240px; /* Allow the cards to grow or shrink while maintaining a base width of 240px */
   max-width: 400px; /* Max width to ensure cards don't stretch too wide */
-  min-width: 250px; /* Minimum width to prevent the cards from becoming too small */
+  min-width: 300px; /* Minimum width to prevent the cards from becoming too small */
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -86,8 +83,9 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 1);
   color: white;
+  font-weight: 800;
   padding: 10px;
   border-radius: 50%;
   cursor: pointer;
@@ -112,8 +110,7 @@
   background-color: #2c8350; /* Green-500 */
   color: white;
   font-size: 1.125rem;
-  padding: 1rem 2rem;
-  border-radius: 0.75rem;
+  border-radius: 1.75rem;
   font-weight: 600;
   text-transform: uppercase;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
@@ -166,8 +163,7 @@
   background-color: #338ad1; /* Blue-500 */
   color: white;
   font-size: 1.125rem;
-  padding: 1rem 2.5rem;
-  border-radius: 0.75rem;
+  border-radius: 1.75rem;
   font-weight: 600;
   text-transform: uppercase;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
@@ -291,7 +287,7 @@
 
   .slider-icon.left,
   .slider-icon.right {
-      display: none; /* Hide slider icons on small screens */
+      /* display: none; Hide slider icons on small screens */
   }
 }
 
@@ -416,7 +412,7 @@
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-10px); /* Adjust the floating height here */
+    transform: translateY(-5px); /* Adjust the floating height here */
   }
   100% {
     transform: translateY(0);
@@ -434,5 +430,6 @@
   padding: 20px; /* Add padding for visual spacing */
   background-color: rgba(200, 200, 200, 0.2); /* Optional: Add a subtle background color */
 }
+
 
 

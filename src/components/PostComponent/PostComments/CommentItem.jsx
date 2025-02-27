@@ -5,7 +5,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const CommentItem = ({ comment, isAuthor, userData, deleteComment, getCommentDate }) => {
     return (
-        <div className="relative animate-fadeIn break-words bg-white bg-opacity-30 backdrop-blur-lg border border-white rounded-lg shadow-lg p-4">
+        <div className="relative animate-fadeIn break-words bg-white bg-opacity-30 backdrop-blur-lg border border-white rounded-3xl shadow-3xl p-4">
             <div className="flex justify-between items-start max-w-80">
                 <p className="text-gray-300 font-semibold">
                     <strong>
@@ -13,12 +13,12 @@ const CommentItem = ({ comment, isAuthor, userData, deleteComment, getCommentDat
                     </strong>
                 </p>
                 {(isAuthor || userData.userId === comment.userId) && (
-                    <Button 
+                    <i 
                         onClick={() => deleteComment(comment)} 
-                        className="absolute top-2 right-2 p-1 bg-red-500 hover:bg-red-600 text-white rounded-full text-xs"
+                        className="absolute top-10 right-2 bg-red-500 p-2 hover:bg-red-600 text-white rounded-full text-xs"
                     >
                         <FontAwesomeIcon icon={faTrash} />
-                    </Button>
+                    </i>
                 )}
             </div>
             <span className="text-gray-400 text-sm">

@@ -13,7 +13,7 @@ const PostsSlider = ({ posts }) => {
   const scrollLeft = () => {
     if (postsContainerRef.current) {
       postsContainerRef.current.scrollBy({
-        left: -300,
+        left: -340,
         behavior: 'smooth',
       });
     }
@@ -22,7 +22,7 @@ const PostsSlider = ({ posts }) => {
   const scrollRight = () => {
     if (postsContainerRef.current) {
       postsContainerRef.current.scrollBy({
-        left: 300,
+        left: 340,
         behavior: 'smooth',
       });
     }
@@ -49,15 +49,16 @@ const PostsSlider = ({ posts }) => {
   }, [posts]);
 
   return (
-    <div className="small-posts-slider mt-12" >
+    <div className="small-posts-slider" >
       <h2 className="text-3xl font-semibold mb-4 text-center">Recent Posts</h2>
       <div className={`posts-container flex overflow-x-auto space-x-6 py-10 px-2 ${posts.length <= 3 ? 'justify-center' : ''}`} ref={postsContainerRef} >
-        {posts.slice(Math.max(posts.length - 5, 0)).reverse().map((post, index) => (
-          <div key={index} className="post-card-container" >
-            <PostCardComponent {...post} />
-          </div>
-        ))}
-      </div>
+          {posts.slice(0, Math.min(5, posts.length)).map((post, index) => (
+            <div key={index} className="post-card-container" >
+              <PostCardComponent {...post} />
+            </div>
+          ))}
+        </div>
+
       {leftIconVisible && (
         <div className="slider-icon left" onClick={scrollLeft}>
           <FontAwesomeIcon icon={faChevronLeft} />

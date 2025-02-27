@@ -10,11 +10,14 @@ const LgMdNotificationsModal = ({ notificationsVisible, notificationRef, notific
                 className={`absolute right-0 mt-2 w-96 bg-gray-600 text-white rounded-lg shadow-xl z-50 transition-transform duration-300 transform scale-100 ${notificationModalStyle}`}
             >
                 <ul className="notification-container flex flex-col space-y-2 p-4">
-                    {notifications.length > 0 ? (
-                        notifications.map((notification, index) => {
+                {notifications.length > 0 ? (
+                    notifications
+                    .slice()
+                        .sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime())
+                        .map((notification, index) => {
                             return (
                                 <li
-                                    key={index}
+                                    key={notification.notificationId} // Use notificationId for better uniqueness
                                     className="notification-item bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg shadow-lg hover:bg-gradient-to-l hover:scale-105 transition-all duration-500 ease-out flex items-center justify-between px-4 py-2"
                                 >
                                     <span
@@ -33,11 +36,12 @@ const LgMdNotificationsModal = ({ notificationsVisible, notificationRef, notific
                                 </li>
                             );
                         })
-                    ) : (
-                        <li className="text-white text-center bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg px-4 py-2 transition-transform duration-300 hover:scale-105">
-                            No notifications
-                        </li>
-                    )}
+                ) : (
+                    <li className="text-white text-center bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg px-4 py-2 transition-transform duration-300 hover:scale-105">
+                        No notifications
+                    </li>
+                )}
+
                 </ul>
             </div>
         )

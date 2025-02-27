@@ -31,8 +31,14 @@ class DynamoService {
     
         try {
             const result = await dynamoDocClient.send(new ScanCommand(params));
+            const sortedPosts = result.Items.sort((a, b) => {
+                return b.createdAt - a.createdAt;
+            });
+            console.log('PostsSorted:', sortedPosts);
+
+    
             return {
-                posts: result.Items,
+                posts: sortedPosts,
                 lastEvaluatedKey: result.LastEvaluatedKey,
             };
         } catch (error) {
@@ -40,6 +46,8 @@ class DynamoService {
             return false;
         }
     }
+    
+
 
     async getPostsByIds(postIds) {
         const params = {

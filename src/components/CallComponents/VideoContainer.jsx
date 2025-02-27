@@ -6,6 +6,7 @@ import { faMicrophone, faMicrophoneSlash, faVideo, faVideoSlash } from '@fortawe
 const VideoContainer = ({ isCaller, isCallAccepted, localVideoRef, remoteVideoRef, getUserDetails, callerUserId, receiverUserId }) => {
     const [userDetails, setUserDetails] = useState(null);
     const isCallerRef = useRef(isCaller);
+    const [isWindowMinimized, setIsWindowMinimized] = useState(false);
 
     useEffect(() => {
         const fetchUserDetails = async () => {
@@ -69,8 +70,25 @@ const VideoContainer = ({ isCaller, isCallAccepted, localVideoRef, remoteVideoRe
         };
     }, []);
 
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 600) {
+                setIsWindowMinimized(true);
+            } else {
+                setIsWindowMinimized(false);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        handleResize(); // Call once to set initial state
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
     return (
-        <div className="video-container flex justify-center items-center relative bg-gray-900 p-4 rounded-lg shadow-lg">
+        <div className={`video-container flex justify-center items-center relative bg-gray-900 p-4 rounded-lg shadow-lg ${isWindowMinimized ? 'minimized' : ''}`}>
             {isCallerRef.current ? (
                 isCallAccepted ? (
                     <>

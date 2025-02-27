@@ -31,9 +31,9 @@ const PostCardComponent = ({ blogId, title, content, featuredImage, userId }) =>
   return (
     <div className={`post-card ${isDarkTheme ? 'post-card-dark' : 'post-card-light'}`} >
       <PostCardThemeToggle isDarkTheme={isDarkTheme} toggleTheme={toggleTheme} />
-      <div className="logo-container">
+      {/* <div className="logo-container">
         <Logo width='60px' />
-      </div>
+      </div> */}
       {loading && <PostCardLoader fadeOut={fadeOut} />}
       <PostCardImage featuredImage={featuredImage} title={title} />
       <PostCardTitle title={title} />

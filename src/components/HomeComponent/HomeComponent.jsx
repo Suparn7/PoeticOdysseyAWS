@@ -32,6 +32,8 @@ const HomeComponent = () => {
           if (postsData) {
             setPosts(postsData.posts);
           }
+          console.log('Posts:', postsData.posts);
+          
         } catch (error) {
           console.error('Error fetching posts:', error);
         }
@@ -80,7 +82,7 @@ const HomeComponent = () => {
               View All Users
             </button>
             <Link to="/PoeticOdyssey/all-posts">
-              <button className="explore-button ml-0">
+              <button className="explore-button ml-0 ">
                 <FontAwesomeIcon icon={faBinoculars} className="mr-2 animate-pulse text-2xl" title="Exploring new worlds" color='rgba(255, 255, 255, 0.8)' />
                 Explore All Posts
               </button>

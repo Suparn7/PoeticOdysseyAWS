@@ -3,7 +3,7 @@
     bottom: 0;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.8); /* Adjust as needed */
-    z-index: 1000;
+    z-index: 999;
     display: flex;
     justify-content: space-between;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);

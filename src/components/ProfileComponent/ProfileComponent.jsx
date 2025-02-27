@@ -16,6 +16,7 @@ import useWebSocketService from '../../webSocketServices/useWebSocketService';
 import dynamoUserInformationService from '../../aws/dynamoUserInformationService';
 import FollowDetailsModal from '../UsersModal/FollowDetailsModal/FollowDetailsModal';
 import Container from '../container/Container';
+import './profile.css'
 
 import {
     handleNameChange,
@@ -123,23 +124,23 @@ const ProfileComponent = () => {
     }
 
     return (
-        <div className="flex justify-center items-center ">
-            <div className="rounded-lg shadow-xl p-6 w-11/12 max-w-lg overflow-x-hidden transform transition-all duration-500 hover:scale-105 hover:shadow-2xl relative"
+        <div className="flex justify-center items-center">
+            <div className="rounded-3xl shadow-3xl p-3 h-auto w-11/12 max-w-lg overflow-x-hidden transform transition-all duration-500 hover:scale-105 hover:shadow-2xl relative"
                 style={{
-                    background: "rgba(0, 0, 0, 0)",
-                    backdropFilter: "blur(10px)",
-                    border: "1px solid rgba(255, 255, 255, 0.2)",
-                    color: "#ffffff",
+                background: "linear-gradient(to bottom, #4c5154, #2f3436)", // Gradient background
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(255, 255, 255, 0.2)",
+                color: "#ffffff",
                 }}>
 
                 {/* Edit Profile Button in the top-right corner */}
                 {!isEditing && isAuthUser && (
-                    <EditProfileButton onClick={() => setIsEditing(true)} />
+                <EditProfileButton onClick={() => setIsEditing(true)} />
                 )}
 
                 {/* Save Button */}
                 {isEditing && isAuthUser && (
-                    <SaveCancelButtons onSaveClick={() => handleSaveClick(() => saveProfile(profilePic, userInfoData, name, bio, email, phone, dispatch, setIsEditing, password), setIsEditing)} onCancelClick={() => handleCancelClick(userInfoData, setName, setBio, setEmail, setPhone, setProfilePicUrl, setIsEditing)} />
+                <SaveCancelButtons onSaveClick={() => handleSaveClick(() => saveProfile(profilePic, userInfoData, name, bio, email, phone, dispatch, setIsEditing, password), setIsEditing)} onCancelClick={() => handleCancelClick(userInfoData, setName, setBio, setEmail, setPhone, setProfilePicUrl, setIsEditing)} />
                 )}
 
                 {/* Profile Content */}
@@ -147,69 +148,74 @@ const ProfileComponent = () => {
                 {/* Profile Picture, Name, Bio, Contact Info Sections */}
                 <div className="flex flex-col items-center space-y-6 w-full">
 
-                    {/* Profile Picture with upload icon */}
+                {/* Profile Picture with upload icon */}
+                <div className="relative">
                     <ProfilePictureUpload
-                        profilePicUrl={profilePicUrl}
-                        isEditing={isEditing}
-                        handleProfilePicChange={(e) => handleProfilePicChange(e, setProfilePic, setProfilePicUrl)}
+                    profilePicUrl={profilePicUrl}
+                    isEditing={isEditing}
+                    handleProfilePicChange={(e) => handleProfilePicChange(e, setProfilePic, setProfilePicUrl)}
                     />
+                    {/* Hover effect for profile picture */}
+                    
+                </div>
 
-                    {/* Name Section */}
-                    <ProfileNameSection
-                        isEditing={isEditing}
-                        name={name}
-                        handleNameChange={(e) => handleNameChange(e, setName)}
+                {/* Name Section */}
+                <ProfileNameSection
+                    isEditing={isEditing}
+                    name={name}
+                    handleNameChange={(e) => handleNameChange(e, setName)}
+                />
+
+                {/* Bio Section below Name */}
+                <ProfileBioSection
+                    isEditing={isEditing}
+                    bio={bio}
+                    handleBioChange={(e) => handleBioChange(e, setBio)}
+                />
+
+                {/* Follow Buttons Section */}
+                {!isEditing && (
+                    <FollowButtonsSection
+                    isAuthUser={isAuthUser}
+                    isFollowing={isFollowing}
+                    isFollowingOrUnfollowing={isFollowingOrUnfollowing}
+                    handleFollowClick={() => handleFollowClick(userInfoData, profileId, isFollowing, setIsFollowing, setIsFollowingOrUnfollowing, sendJsonMessage, dispatch)}
+                    fetchFollowing={() => fetchFollowing(profileId, userInfoData, setFollowing, setIsFollowModalOpen, setModalType, setIsLoadingFollowing)}
+                    fetchFollowers={() => fetchFollowers(profileId, userInfoData, setFollowers, setIsFollowModalOpen, setModalType, setIsLoadingFollowers)}
                     />
+                )}
 
-                    {/* Bio Section below Name */}
-                    <ProfileBioSection
-                        isEditing={isEditing}
-                        bio={bio}
-                        handleBioChange={(e) => handleBioChange(e, setBio)}
-                    />
+                {/* "Posts by Username" Button */}
+                {!isAuthUser && (
+                    <UserPostsButton profileId={profileId} name={name} />
+                )}
 
-                    {/* Follow Buttons Section */}
-                    {!isEditing && (
-                        <FollowButtonsSection
-                            isAuthUser={isAuthUser}
-                            isFollowing={isFollowing}
-                            isFollowingOrUnfollowing={isFollowingOrUnfollowing}
-                            handleFollowClick={() => handleFollowClick(userInfoData, profileId, isFollowing, setIsFollowing, setIsFollowingOrUnfollowing, sendJsonMessage, dispatch)}
-                            fetchFollowing={() => fetchFollowing(profileId, userInfoData, setFollowing, setIsFollowModalOpen, setModalType, setIsLoadingFollowing)}
-                            fetchFollowers={() => fetchFollowers(profileId, userInfoData, setFollowers, setIsFollowModalOpen, setModalType, setIsLoadingFollowers)}
-                        />
-                    )}
+                {/* Modal for Followers/Following */}
+                <FollowDetailsModal
+                    isOpen={isFollowModalOpen}
+                    closeModal={() => closeModal(setIsFollowModalOpen)}
+                    modalType={modalType}
+                    followers={followers}
+                    following={following}
+                />
 
-                    {/* "Posts by Username" Button */}
-                    {!isAuthUser && (
-                        <UserPostsButton profileId={profileId} name={name} />
-                    )}
+                {/* Liked & Saved Posts (below Name) with Cool Animated Buttons */}
+                {!isEditing && isAuthUser && (
+                    <LikedSavedPostsButtons />
+                )}
 
-                    {/* Modal for Followers/Following */}
-                    <FollowDetailsModal
-                        isOpen={isFollowModalOpen}
-                        closeModal={() => closeModal(setIsFollowModalOpen)}
-                        modalType={modalType}
-                        followers={followers}
-                        following={following}
-                    />
-
-                    {/* Liked & Saved Posts (below Name) with Cool Animated Buttons */}
-                    {!isEditing && isAuthUser && (
-                        <LikedSavedPostsButtons />
-                    )}
-
-                    {/* Contact Info Section */}
-                    <ContactInfoSection
-                        isEditing={isEditing}
-                        email={email}
-                        phone={phone}
-                        handleEmailChange={(e) => handleEmailChange(e, setEmail)}
-                        handlePhoneChange={(e) => handlePhoneChange(e, setPhone)}
-                    />
+                {/* Contact Info Section */}
+                <ContactInfoSection
+                    isEditing={isEditing}
+                    email={email}
+                    phone={phone}
+                    handleEmailChange={(e) => handleEmailChange(e, setEmail)}
+                    handlePhoneChange={(e) => handlePhoneChange(e, setPhone)}
+                />
                 </div>
             </div>
         </div>
+
     );
 };
 

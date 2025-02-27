@@ -13,12 +13,12 @@ const CommentHeader = () => {
                 className="text-2xl font-bold text-yellow-300"
                 style={{
                     padding: '10px 20px',
-                    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+                    backgroundColor: 'rgba(0, 0, 0, 0.7)',
                     backdropFilter: 'blur(10px)',
-                    borderRadius: '8px',
+                    borderRadius: '40px',
                     textAlign: 'center',
                     display: 'inline-block',
-                    minWidth: "225px"
+                    minWidth: "195px"
                 }}
             >
                 Comments

@@ -15,7 +15,7 @@ const EditProfileButton = ({ onClick }) => {
                 color: "#000",
                 fontWeight: "600",
                 padding: "5px 8px",
-                borderRadius: "8px",
+                borderRadius: "40px",
                 boxShadow: "0 4px 10px rgba(255, 255, 255, 0.3)",
                 transition: "transform 0.3s ease-in-out, background 0.3s ease-in-out",
             }}

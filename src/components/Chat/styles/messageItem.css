@@ -1,0 +1,71 @@
+.missed-call-message {
+    padding: 0px;
+    border-radius: 20px;
+    margin: 0px 0;
+    color: #fff;
+  }
+  
+  .missed-call-message.video-call {
+    background-color: #ff6347; /* Tomato color for video call */
+  }
+  
+  .missed-call-message.audio-call {
+    background-color: #4682b4; /* SteelBlue color for audio call */
+  }
+
+  .msgImgmodal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+  }
+  
+  .msgImgmodal-content {
+    margin: auto;
+    display: block;
+    width: auto;
+    max-width: 700px;
+  }
+  
+  #modal-caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+  }
+  
+  .msgImgmodalclose {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  
+  .msgImgmodalclose:hover,
+  .msgImgmodalclose:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  /* For smaller screens */
+  @media only screen and (max-width: 700px) {
+    .msgImgmodal-content {
+      width: 100%;
+    }
+  }
+  
+
+  
